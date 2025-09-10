@@ -4,8 +4,10 @@
   "description": "A boilerplate template to build apps with React and Node",
   "scripts": {
     "client": "npm start --prefix client",
-    "server": "npm start --prefix server",
-    "deploy-client": "npm run build --prefix client"
+    "pro-server": "cd server && npm run installation && npm start",
+    "pro-deploy-client": "cd client && npm run installation && npm run build",
+    "dev-server": "npm start --prefix server",
+    "dev-deploy-client": "cd client && npm run build"
   },
   "repository": {
     "type": "git",

@@ -4,7 +4,9 @@
   "description": "Node-Express Server for the boilerplate",
   "main": "src/server.js",
   "scripts": {
+    "installation": "npm install",
     "start": "node src/server.js"
+    
   },
   "keywords": [
     "server",
