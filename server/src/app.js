@@ -11,6 +11,14 @@ const path = require('path');
 // Server Basic Setting 
 const app = express();
 
+// Server Logging the request 
+const morgan = require('morgan');
+app.use(morgan('tiny'));
+
+// Server automatically parise the request body
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
+
 
 /********* Serve FrontEnd files *********** */
 //Serve a static websiste from the public folder
