@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Node-Express Server for the boilerplate",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "server",
+    "express",
+    "node"
+  ],
+  "author": "Riccardo riccardop@outlook.com",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}

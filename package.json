@@ -1,0 +1,26 @@
+{
+  "name": "boilerplate-react-client-express-server",
+  "version": "1.0.0",
+  "description": "A boilerplate template to build apps with React and Node",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "deploy-client": "npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riccardopdev/boilerplate-react-client-express-server.git"
+  },
+  "keywords": [
+    "template",
+    "boilerplate",
+    "react",
+    "node",
+    "express"
+  ],
+  "author": "Riccardo riccardop@outlook.com",
+  "bugs": {
+    "url": "https://github.com/riccardopdev/boilerplate-react-client-express-server/issues"
+  },
+  "homepage": "https://github.com/riccardopdev/boilerplate-react-client-express-server#readme"
+}
