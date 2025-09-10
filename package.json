@@ -7,7 +7,8 @@
     "pro-server": "cd server && npm run installation && npm start",
     "pro-deploy-client": "cd client && npm run installation && npm run build",
     "dev-server": "npm start --prefix server",
-    "dev-deploy-client": "cd client && npm run build"
+    "dev-deploy-client": "cd client && npm run build",
+    "dev": "npm run dev-deploy-client && cross-env NODE_ENV=development npm run dev-server"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/riccardopdev/boilerplate-react-client-express-server/issues"
   },
-  "homepage": "https://github.com/riccardopdev/boilerplate-react-client-express-server#readme"
+  "homepage": "https://github.com/riccardopdev/boilerplate-react-client-express-server#readme",
+  "devDependencies": {
+    "cross-env": "^10.0.0"
+  }
 }

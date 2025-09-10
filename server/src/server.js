@@ -1,19 +1,9 @@
-const express = require('express');
-const path = require('path');
 
-const app = express();
+/********* Import External Modules *********** */
 
-const PORT = 8000;
-
-//Serve a static websiste from the public folder
-app.use(express.static(path.join(__dirname, '..', 'public')));
-
-//GET request on localhost:8000
-//The * symbol will match any route that is not matched by other middleware
-//This will allow React routes to work
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
-});
+// Server Setting 
+const app = require('./app');
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`);
