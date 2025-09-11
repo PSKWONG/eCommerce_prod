@@ -1,10 +1,11 @@
 /********* Import External Modules *********** */
-//require('dotenv-flow').config(); 
 require('./modules/enviromentVariables/envConfig'); //Enviroment Variable Configuration
 const express = require('express');
 const path = require('path');
 
 /********* Import Internal Modules *********** */
+const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
+
 
 
 /********* Server Basic Middlewares *********** */
@@ -29,6 +30,17 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
+
+/*********** Error Handling Modules **************** */
+
+
+if (process.env.NODE_ENV === 'development') {
+    console.log('Error in Server')
+    app.use(errorhandler());
+} else {
+    app.use(customErrorHandler);
+}
+
 
 
 
