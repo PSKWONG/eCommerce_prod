@@ -35,7 +35,6 @@ app.get('/*', (req, res) => {
 
 
 if (process.env.NODE_ENV === 'development') {
-    console.log('Error in Server')
     app.use(errorhandler());
 } else {
     app.use(customErrorHandler);
