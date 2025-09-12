@@ -5,6 +5,8 @@ const path = require('path');
 
 /********* Import Internal Modules *********** */
 const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
+const sessionContent = require('./modules/ssessions/expressSessionConfig'); //Session module with configuration 
+
 
 
 
@@ -30,6 +32,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
+
+/*********** Session **************** */
+app.use(sessionContent);
 
 /*********** Error Handling Modules **************** */
 
