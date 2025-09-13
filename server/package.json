@@ -14,13 +14,19 @@
   ],
   "author": "Riccardo riccardop@outlook.com",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "connect-pg-simple": "^10.0.0",
     "dotenv": "^17.2.2",
     "dotenv-flow": "^4.1.0",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.3",
     "express-session": "^1.18.2",
+    "generate-password": "^1.7.1",
     "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-facebook": "^3.0.0",
+    "passport-local": "^1.0.0",
     "pg": "^8.16.3"
   }
 }

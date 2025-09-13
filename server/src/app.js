@@ -2,10 +2,13 @@
 require('./modules/enviromentVariables/envConfig'); //Enviroment Variable Configuration
 const express = require('express');
 const path = require('path');
+const passport = require('passport'); // Import "Passport" Module 
+const errorhandler = require('errorhandler'); // Error handler in development environment
+
 
 /********* Import Internal Modules *********** */
 const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
-const sessionContent = require('./modules/ssessions/expressSessionConfig'); //Session module with configuration 
+const sessionContent = require('./modules/sessions/expressSessionConfig'); //Session module with configuration 
 
 
 
@@ -35,6 +38,12 @@ app.get('/*', (req, res) => {
 
 /*********** Session **************** */
 app.use(sessionContent);
+
+/*********** Passport  **************** */
+require('./controllers/security/passport/passportConfig')(passport); // Apply Passport Configuration
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 /*********** Error Handling Modules **************** */
 
