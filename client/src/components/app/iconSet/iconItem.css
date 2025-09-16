@@ -1,0 +1,11 @@
+.iconItem {
+    width: 35px;
+    height: 35px;
+
+    fill: rgb(11, 54, 2);
+    /* if your SVG uses fill */
+    stroke: rgb(255, 255, 255);
+    /* if your SVG uses stroke */
+    stroke-width:20;
+
+}

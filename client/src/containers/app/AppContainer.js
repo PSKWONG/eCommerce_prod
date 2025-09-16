@@ -6,6 +6,7 @@ import { RouterProvider } from 'react-router-dom';
 
 /***************Import Internal Modules****************** */
 import appRoute from './appRoute'; 
+import '../../components/app/app.css'; 
 
 
 const AppContainer = () => {

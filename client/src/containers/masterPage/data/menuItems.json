@@ -1,0 +1,52 @@
+[
+    {
+        "ref": "home", 
+        "label": "Home",
+        "path": "/",
+        "type": 0,
+        "position": 0
+
+    },
+    {
+        "ref": "shop", 
+        "label": "Shop",
+        "path": "/shop",
+        "type": 0,
+        "position": 1
+    },
+    {
+        "ref": "about", 
+        "label": "About Us",
+        "path": "/",
+        "type": 1,
+        "position": 11
+    },
+    {
+        "ref": "contact", 
+        "label": "Contact Us",
+        "path": "/",
+        "type": 1,
+        "position": 12
+    },
+    {
+        "ref": "cart", 
+        "label": "Cart",
+        "path": "/cart",
+        "type": 2,
+        "position": 21
+    },
+    {   
+        "ref": "guest", 
+        "label": "Guest",
+        "path": "/authen/signup",
+        "type": 2,
+        "position": 22
+    },
+    {
+        "ref": "user",
+        "label": "User",
+        "path": "/user",
+        "type": 2,
+        "position": 23
+    }
+]
