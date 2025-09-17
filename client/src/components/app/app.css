@@ -1,7 +1,42 @@
+
+/*
+************************** Global Variable ***********************
+Root CSS Variable
+Recommended to declare the Global CSS Variable in this page for managment
+*/
+:root {
+    --masterHeaderHeight: 75;
+    --masterMobileMenuHeight: 75;
+    
+}
+
+/*
+************************** Basic Setting of the App ***********************
+Style set for:
+- HTML  
+- Body 
+- Root Div 
+*/
+
+html,
 body,
 #root {
     height: 100%;
     width: 100%;
     margin: 0px;
     box-sizing: border-box;
+}
+
+#root {
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    background-image: var(--backgroundForApp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }

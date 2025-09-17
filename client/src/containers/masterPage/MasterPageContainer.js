@@ -7,6 +7,9 @@ import { useDispatch } from 'react-redux';
 /***************Import Internal Modules****************** */
 import useWindowObserver from '../app/hook/windowSizeObserver'; 
 import useMenuController from './hook/menuController'; 
+import useBackgroundController from './hook/backgroundController'; 
+import useResponsivecontroller from './hook/responsiveLayoutController'; 
+import MasterPageComponent from '../../components/masterPage/MasterPageComponent'; 
 
 /***************Context Content Container****************** */
 export const MasterPageContext = createContext(null);
@@ -17,13 +20,19 @@ const MasterPageContainer = React.memo(() => {
     //Hook Actions 
     const dispatch = useDispatch(); 
 
-    /*
-    Menu Control
-    - Use Windows Observer to obtain the Windows Size 
-    - Put the widnows size information to the Menu Controller function
-    - Get MenuController Information 
-    */
+
+    //Hook for Providing Window Size 
     const windowSize = useWindowObserver(); 
+
+    
+    //Hook for Responsive Control 
+    useResponsivecontroller(windowSize); 
+
+    
+    // Hook for Background Control ( Initial Phase ) 
+    useBackgroundController(); 
+
+    //Hook for creating menuController 
     const menuController = useMenuController(windowSize); 
 
     //Exported Data
@@ -32,7 +41,7 @@ const MasterPageContainer = React.memo(() => {
 
     return (
         <MasterPageContext.Provider value = {exportedData}>
-            
+            <MasterPageComponent /> 
 
 
         </MasterPageContext.Provider>

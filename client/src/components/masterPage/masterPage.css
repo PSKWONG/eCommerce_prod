@@ -1,0 +1,97 @@
+/*
+Master Page Style Sheet
+- Structure of the master Page 
+*/
+
+/*
+******************* Variable  in Master Page ******************* 
+*/
+.masterContentWrapper {
+    --contentPadding: 10;
+    --masterPaddingTop: calc((var(--masterHeaderHeight)) * 1px);
+    --masterPaddingBottom: calc((var(--masterMobileMenuHeight)) * 1px);
+
+}
+
+
+/*
+*******************Header Wrapper******************* 
+- Locate at the top of the app with sticky position 
+*/
+.masterHeaderWrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+.masterHeaderWrapper {
+    width: 100%;
+    height: calc(var(--masterHeaderHeight) * 1px);
+    background-color: rgba(255, 255, 255, 0.35);
+    border-radius: 15px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.masterHeaderWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/*
+******************* Content Wrapper ******************* 
+- Locate at the Middle of the app with full page 
+*/
+
+.masterContentWrapper {
+    height: 100%;
+    width: 100%;
+    padding-top: var(--masterPaddingTop);
+    padding-bottom: var(--masterPaddingBottom);
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+
+}
+
+/*
+******************* Mobile Menu Wrapper ******************* 
+- Locate at the Bottom of the app with full page 
+*/
+.masterMobileMenuWrapper {
+
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 100;
+
+}
+
+.masterMobileMenuWrapper {
+
+    height: calc(var(--masterMobileMenuHeight) * 1px);
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-radius: 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid #e0e0e0;
+    transform: translateZ(0);
+    display:none;
+
+
+}
+
+body.mobile .masterMobileMenuWrapper {
+    display:block; 
+}
+
+
