@@ -1,0 +1,123 @@
+/*
+Header Section of Master Page Style Sheet
+- Style of components in header section 
+*/
+
+
+/*
+******************* Logo Components ******************* 
+*/
+
+.logoWrapper {
+    flex-basis: 150px;
+    flex-grow: 1;
+}
+
+.logoWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logoWrapper strong {
+    color: #225820;
+    font-weight: 800;
+}
+
+.logoWrapper img {
+    width: 50px;
+    /*
+    background-color:white;
+    border-radius: 100%;;
+    */
+}
+
+
+
+/*
+******************* Hambuger Menu Icon Styles ******************* 
+*/
+
+.burgerMenuIcon {
+    flex-basis: 50px;
+    flex-grow: 0;
+}
+
+.burgerMenuIcon {
+    height: 35px;
+    background:transparent; 
+    outline:none; 
+    border:0px; 
+    cursor:pointer; 
+}
+
+
+/*
+******************* Menu Component Styles ******************* 
+*/
+ul.menu {
+    margin: 0;
+    padding: 0;
+}
+
+ul.menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Naviagtion Menu Component Styles */
+ul.nav {
+    display: none;
+    font-weight: 800;
+}
+
+/* Functional Menu Component Styles */
+ul.func {
+    flex-grow: 0;
+    gap: 25px;
+}
+
+
+/*
+******************* Responsive Style ******************* 
+*/
+
+/* Responsive Style for logoWrapper */
+body.desktop .logoWrapper {
+    flex-grow: 0;
+}
+
+/* Responsive Style for Burger Menu */
+body.desktop .burgerMenuIcon{
+    display:none; 
+}
+
+/* Responsive Style for Navigation Menu  */
+body.tablet ul.nav,
+body.desktop ul.nav {
+    flex-basis: 250px;
+    flex-grow: 1; 
+}
+
+body.tablet ul.nav,
+body.desktop ul.nav {
+    display: flex;
+    gap: 30px;
+
+}
+
+/* Responsive Style for Functional Menu  */
+body.tablet ul.func,
+body.desktop ul.func {
+    flex-basis: 150px;
+    flex-grow: 0;
+}
+

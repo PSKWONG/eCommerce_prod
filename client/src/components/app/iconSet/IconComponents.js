@@ -16,7 +16,7 @@ const IconComponent = (props) => {
     */
 
     //Extract Icon 
-    const ref = props?.reference ?? 'home';
+    const ref = props?.data ?? 'home';
     const ItemIcon = iconRegistration[ref];
 
     return <ItemIcon className={'iconItem'} />

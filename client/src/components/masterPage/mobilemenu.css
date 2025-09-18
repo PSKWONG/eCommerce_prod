@@ -1,0 +1,13 @@
+/* Functional Menu Component Styles */
+ul.mobile {
+    flex-grow: 0;
+    gap: 25px;
+}
+
+ul.mobile {
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap:nowrap; 
+    justify-content:center; 
+}
+

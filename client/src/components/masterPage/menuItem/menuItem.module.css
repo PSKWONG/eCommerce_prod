@@ -1,0 +1,28 @@
+/*
+Style Sheet for menu Item Component in Master Page
+*/
+
+/* General Styles for menu Item */
+li.item {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+
+/* Styles for 'Icon' Item */
+li.icon {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+li.icon .iconItem {
+    height: 30px;
+}
+
+li.icon span {
+    font-size: 0.8em;
+}

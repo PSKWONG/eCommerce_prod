@@ -25,15 +25,18 @@ This app has following types of menu
 ### Conditions
 - Mobile size: 
     * Mobile Menu : Item types ( 0, 2 )
-    * Navigational Menu : Item types ( 1 )
+    * Navigational Menu : Null    
+    * Floating Menu : Item types ( 1 )
     * Functional Menu: Null
 - Tablet Size: 
     * Mobile Menu : Null 
-    * Navigational Menu : Item types ( 0, 1 )
+    * Floating Menu : Item types ( 1 )
+    * Navigational Menu : Item types ( 0 )
     * Functional Menu: Item types ( 2 )
 - Desktop Size: 
     * Mobile Menu : Null 
-    * Navigational Menu : Item types ( 0, 1 )
+    * Floating Menu : Null
+    * Navigational Menu : Item types ( 0,1 )
     * Functional Menu: Item types ( 2 )
 
 */
@@ -47,6 +50,7 @@ const useMenuController = (windowSize) => {
     const [funcMenuItems, setFuncMenuItems] = useState([]);
     const [mobileMenuItems, setMobileMenuItems] = useState([]);
     const [floatingNavMenuItems, setFloatingNavMenuItems] = useState([]);
+    const [isFloatingMenuVisible, setIsFloatingMenuVisible] = useState(false);
 
 
     //Response to change of window size 
@@ -59,24 +63,49 @@ const useMenuController = (windowSize) => {
     //Menu Items distribution 
     useEffect(() => {
         if (pageWidth <= responsiveGuide['mobile']) {
-            setNavMenuItems(
-                menuItems
-                    .filter((item) => item.type === 1)
-                    .sort((a, b) => a["position"] - b["position"])
-            );
-
-            setFuncMenuItems([]);
-
             setMobileMenuItems(
                 menuItems
                     .filter((item) => item.type === 0 || item.type === 2)
                     .sort((a, b) => a["position"] - b["position"])
             );
 
+            setFloatingNavMenuItems(
+                menuItems
+                    .filter((item) => item.type === 1)
+                    .sort((a, b) => a["position"] - b["position"])
+            );
+
+
+            setNavMenuItems([]);
+            setFuncMenuItems([]);
+
+
+        } else if (pageWidth <= responsiveGuide['tablet']) {
+
+            setNavMenuItems(
+                menuItems
+                    .filter((item) => item.type === 0)
+                    .sort((a, b) => a["position"] - b["position"])
+            );
+
+            setFuncMenuItems(
+                menuItems
+                    .filter((item) =>  item.type === 2)
+                    .sort((a, b) => a["position"] - b["position"])
+            );
+
+            setFloatingNavMenuItems(
+                menuItems
+                    .filter((item) => item.type === 1 )
+                    .sort((a, b) => a["position"] - b["position"])
+            );
+
+            setMobileMenuItems([]);
 
         } else {
 
             setMobileMenuItems([]);
+            setFloatingNavMenuItems([]); 
 
             setNavMenuItems(
                 menuItems
@@ -96,26 +125,26 @@ const useMenuController = (windowSize) => {
     //Set Floating Menu Actions
     const handleShowingFloatingMenu = (event) => {
         event.preventDefault();
-        setFloatingNavMenuItems(navMenuItems);
+        if(isFloatingMenuVisible){
+            setIsFloatingMenuVisible(false);
+        }else{
+            setIsFloatingMenuVisible(true);
+        }
+        
     }
 
-    const handleCloseFloatingMenu = (event) => {
-        event.preventDefault();
-        setFloatingNavMenuItems([]);
-    }
 
     //Information to be exported 
-    
+
     return {
-        data:{
+        data: {
             navMenuItems,
             funcMenuItems,
             mobileMenuItems,
             floatingNavMenuItems
         },
-        actions:{
+        actions: {
             handleShowingFloatingMenu,
-            handleCloseFloatingMenu
         }
     }
 

@@ -1,6 +1,5 @@
 /***************Import External Modules****************** */
-import React, { useEffect, createContext } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { createContext } from 'react';
 
 
 
@@ -16,10 +15,6 @@ export const MasterPageContext = createContext(null);
 
 
 const MasterPageContainer = React.memo(() => {
-
-    //Hook Actions 
-    const dispatch = useDispatch(); 
-
 
     //Hook for Providing Window Size 
     const windowSize = useWindowObserver(); 
