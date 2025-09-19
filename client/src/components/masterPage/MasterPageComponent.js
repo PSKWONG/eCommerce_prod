@@ -26,9 +26,9 @@ Masterpage is mainly composed of the following components
 const MasterPageComponent = () => {
 
     //Get the data from container 
-    const { data, action } = useContext(MasterPageContext) ?? {};
+    const { data, actions } = useContext(MasterPageContext) ?? {};
     const { navMenuItems, funcMenuItems, mobileMenuItems } = data ?? {};
-    const { handleShowingFloatingMenu } = action ?? {};
+    const { showPortal } = actions ?? {};
 
 
 
@@ -63,7 +63,7 @@ const MasterPageComponent = () => {
     return (
         <>
             <div className={'masterHeaderWrapper'}>
-                <button alt="Expand or Hide Menu" onClick={handleShowingFloatingMenu} className={'burgerMenuIcon'}>
+                <button alt="Expand or Hide Menu" onClick={showPortal} className={'burgerMenuIcon'}>
                     <IconSet data={'burgerMenu'} />
                 </button>
                 <div className={'logoWrapper'}>
