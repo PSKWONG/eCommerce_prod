@@ -9,6 +9,7 @@ import useMenuController from './hook/menuController';
 import useBackgroundController from './hook/backgroundController';
 import useResponsivecontroller from './hook/responsiveLayoutController';
 import usePortalController from '../../containers/portal/hook/portController';
+import PortalComponent from '../../components/portal/portComponent'; 
 import MasterPageComponent from '../../components/masterPage/MasterPageComponent';
 
 /***************Context Content Container****************** */
@@ -53,9 +54,7 @@ const MasterPageContainer = React.memo(() => {
     return (
         <MasterPageContext.Provider value={exportedData}>
             <MasterPageComponent />
-            {isVisible && (
-                console.log('Portal is visible')
-            )}
+            {isVisible && <PortalComponent />}
 
         </MasterPageContext.Provider>
     )
