@@ -9,6 +9,7 @@ import useMenuController from './hook/menuController';
 import useBackgroundController from './hook/backgroundController';
 import useResponsivecontroller from './hook/responsiveLayoutController';
 import usePortalController from '../../containers/portal/hook/portController';
+import PortalMenu from '../../components/masterPage/portalMenu/PortalMenu'; 
 import MasterPageComponent from '../../components/masterPage/MasterPageComponent';
 
 /***************Context Content Container****************** */
@@ -34,7 +35,7 @@ const MasterPageContainer = React.memo(() => {
     
 
     //Hook for Portal Control
-    const portalController = usePortalController();
+    const portalController = usePortalController(PortalMenu);
     const { PortalComponent } = portalController.data;
 
     //Exported Data

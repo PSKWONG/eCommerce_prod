@@ -11,7 +11,7 @@ const PortalComponent = (props) => {
 
     //Extract the information from props
     const {data, actions } = props?.data ?? {}; 
-    const content = data?.visibleContent; 
+    const content = data?.contentDisplayed; 
 
     return createPortal(
 

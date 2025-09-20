@@ -1,9 +1,20 @@
 /***************Import external Modules****************** */
-import { useState, useEffect, isValidElement  } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /***************Import Internal Modules****************** */
-import PortalTemplate from '../../../components/portal/portComponent'; 
+import PortalTemplate from '../../../components/portal/portComponent';
 
+/*
+This hook is used to put the content into a Portal Template.
+## Input: 
+- content : 
+    * It should be a REACT function which return a JSX element
+
+## States :
+- isVisible to constrol whether displaying the portal; 
+- visibleContent is the content to display after checking 
+
+*/
 
 const usePortalController = (content) => {
 
@@ -12,49 +23,71 @@ const usePortalController = (content) => {
         - isVisibile to constrol whether displaying the portal; 
     */
     const [isVisible, setIsVisible] = useState(false);
-    const [visibleContent, setVisibleContent] = useState(); 
+    const [contentDisplayed, setContentDisplayed] = useState();
 
     //Update visible content
-    useEffect(()=>{
-        if(isValidElement(content)){
-            setVisibleContent(content); 
+    useEffect(() => {
+
+        const defaultContent = <>There is no content to display</>;
+
+        if (typeof content === 'function') {
+
+            try {
+                const element = React.createElement(content);
+                setContentDisplayed(element);
+                return;
+
+            } catch (err) {
+                //Internal Log
+                console.log(
+                    `Error in showing Portal Conctent. The content is invalid. 
+                        * Input content: ${content}
+                        `
+                )
+                setContentDisplayed(defaultContent);
+                return;
+            }
+
+        } else {
+            setContentDisplayed(defaultContent);
+            return;
         }
-        setVisibleContent(<>There is no content to display</>)
+
     }, [content])
 
 
     //Actions to show the portal 
-    const showPortal = (event)=>{
-        event.preventDefault(); 
-        setIsVisible(true); 
+    const showPortal = (event) => {
+        event.preventDefault();
+        setIsVisible(true);
     }
 
     //Actions to close the portal 
-    const closePortal = (event)=>{
-        event.preventDefault(); 
-        setIsVisible(false); 
+    const closePortal = (event) => {
+        event.preventDefault();
+        setIsVisible(false);
     }
 
     //Information pass to the Portal Page
     const infoToPortal = {
 
-        data:{
-            visibleContent
-        }, 
-        actions:{
+        data: {
+            contentDisplayed
+        },
+        actions: {
             closePortal
         }
 
-    }; 
+    };
 
-    const PortalComponent = ()=>{
+    const PortalComponent = () => {
 
-        if(!isVisible){
+        if (!isVisible) {
             return <></>
         }
 
         return <PortalTemplate data={infoToPortal} />
-    }; 
+    };
 
 
 
@@ -62,8 +95,8 @@ const usePortalController = (content) => {
     return {
         data: {
             PortalComponent
-        }, 
-        actions:{
+        },
+        actions: {
             showPortal
         }
     }
