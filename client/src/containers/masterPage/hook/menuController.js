@@ -50,7 +50,6 @@ const useMenuController = (windowSize) => {
     const [funcMenuItems, setFuncMenuItems] = useState([]);
     const [mobileMenuItems, setMobileMenuItems] = useState([]);
     const [floatingNavMenuItems, setFloatingNavMenuItems] = useState([]);
-    const [isFloatingMenuVisible, setIsFloatingMenuVisible] = useState(false);
 
 
     //Response to change of window size 

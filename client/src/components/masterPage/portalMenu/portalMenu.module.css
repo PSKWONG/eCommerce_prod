@@ -1,0 +1,17 @@
+/***** Structure of the content Wrapper *****/
+ul.menu {
+    display:flex;
+    flex-direction:column; 
+    flex-wrap:nowrap; 
+    gap:20px;
+}
+
+ul.menu>li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size:2em;
+    font-weight:600;
+    border-bottom:1px solid rgba(112, 112, 112, 0.3);
+}
