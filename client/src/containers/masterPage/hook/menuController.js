@@ -122,16 +122,7 @@ const useMenuController = (windowSize) => {
         }
     }, [pageWidth])
 
-    //Set Floating Menu Actions
-    const handleShowingFloatingMenu = (event) => {
-        event.preventDefault();
-        if(isFloatingMenuVisible){
-            setIsFloatingMenuVisible(false);
-        }else{
-            setIsFloatingMenuVisible(true);
-        }
-        
-    }
+
 
 
     //Information to be exported 
@@ -144,7 +135,6 @@ const useMenuController = (windowSize) => {
             floatingNavMenuItems
         },
         actions: {
-            handleShowingFloatingMenu,
         }
     }
 

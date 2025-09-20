@@ -17,3 +17,21 @@ Style Sheet for Portal Component
     justify-content: center;
     align-items: center;
 }
+
+/* Style for Close Button */
+
+button.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    fill: black;
+}
+
+button.close {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    outline: none;
+    border: 0px;
+    cursor: pointer;
+}

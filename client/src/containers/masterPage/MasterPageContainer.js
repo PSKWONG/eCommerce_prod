@@ -9,7 +9,6 @@ import useMenuController from './hook/menuController';
 import useBackgroundController from './hook/backgroundController';
 import useResponsivecontroller from './hook/responsiveLayoutController';
 import usePortalController from '../../containers/portal/hook/portController';
-import PortalComponent from '../../components/portal/portComponent'; 
 import MasterPageComponent from '../../components/masterPage/MasterPageComponent';
 
 /***************Context Content Container****************** */
@@ -32,9 +31,11 @@ const MasterPageContainer = React.memo(() => {
     //Hook for creating menuController 
     const menuController = useMenuController(windowSize);
 
+    
+
     //Hook for Portal Control
     const portalController = usePortalController();
-    const { isVisible } = portalController.data;
+    const { PortalComponent } = portalController.data;
 
     //Exported Data
     const exportedData = {
@@ -47,15 +48,10 @@ const MasterPageContainer = React.memo(() => {
         }
     };
 
-
-
-
-
     return (
         <MasterPageContext.Provider value={exportedData}>
             <MasterPageComponent />
-            {isVisible && <PortalComponent />}
-
+            <PortalComponent />
         </MasterPageContext.Provider>
     )
 
