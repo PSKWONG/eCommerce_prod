@@ -1,0 +1,33 @@
+/*Style Sheet for applying Shaddow Box */
+.shadowingBox {
+    --boxpadding: 25px;
+    --shadowBoxBackground: white;
+}
+
+
+.shadowingBox {
+    padding: var(--boxpadding);
+    box-sizing: border-box;
+    background-color: var(--shadowBoxBackground);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px grey;
+}
+
+
+/*Default Style for Shaddow Box Components  */
+.shadowingBox h1 {
+    font-weight: 800;
+    color: rgb(15, 65, 10);
+}
+
+.shadowingBox .section {
+    padding: var(--boxpadding);
+    box-sizing: border-box;
+    background-color: rgb(13, 51, 18);
+    margin: 10px calc(0px - var(--boxpadding));
+    color: white;
+}
+
+
+
+

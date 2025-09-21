@@ -1,0 +1,67 @@
+/*Style Sheet for Form Wrapper */
+
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+
+/*Default Style for Shaddow Box Components  */
+.formWrapper>div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.formWrapper label {
+    flex-basis: 80px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.formWrapper input {
+    min-width: 150px;
+    flex-basis: 350px;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.formWrapper input {
+    border-radius: 5px;
+    border: 1px solid rgb(10, 53, 2);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.formWrapper button {
+
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid rgb(10, 53, 2);
+    outline: none;
+    color: rgb(10, 53, 2);
+    background-color: white;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.formWrapper button:hover {
+    background-color: rgb(10, 53, 2);
+    color: white;
+}
+
+/******* Responsive Style *****/
+:global(body.mobile) .formWrapper input,
+:global(body.tablet) .formWrapper input {
+    flex-shrink: 1;
+}
+
+:global(body.mobile) .formWrapper label,
+:global(body.tablet) .formWrapper label {
+    flex-grow: 1;
+}

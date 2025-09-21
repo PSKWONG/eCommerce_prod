@@ -1,5 +1,6 @@
 /***************Import external Modules****************** */
 import React, { useContext } from 'react';
+import {Outlet} from 'react-router-dom';
 
 
 /***************Import Internal Modules****************** */
@@ -79,7 +80,7 @@ const MasterPageComponent = () => {
 
             </div>
             <div className={'masterContentWrapper'}>
-                Content Wrapper
+                <Outlet />
             </div>
             <div className={'masterMobileMenuWrapper'}>
                 <ul className={`menu mobile`}>

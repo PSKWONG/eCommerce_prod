@@ -1,0 +1,47 @@
+/*
+Style Sheet for Single Page Template
+*/
+
+/*
+Outter Most Wrapper for positioning the Page 
+- Content place at the middle of the page 
+- Margin top and bottom with other components 
+*/
+
+.singlePageWrapper{
+
+    width:100%;
+    min-height:100%;
+    box-sizing:border-box; 
+    padding: 10px 0px;
+
+}
+
+.singlePageWrapper{
+    display:flex;
+    flex-direction:row; 
+    justify-content:center; 
+    align-items:center; 
+}
+
+/*
+Content Wrapper for Single Page Template 
+- Control the width of the Content 
+*/
+
+.singlePageWrapper>.contentWrapper{
+    width:90%;
+    max-width:90%;
+    min-height:90%; 
+
+}
+
+
+/*
+******************* Responsive Style ******************* 
+*/
+body.desktop .singlePageWrapper>.contentWrapper{
+    width:50%;
+    min-height:50%; 
+    max-width:1100px;
+}
