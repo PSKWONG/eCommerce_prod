@@ -7,6 +7,7 @@ const errorhandler = require('errorhandler'); // Error handler in development en
 
 
 /********* Import Internal Modules *********** */
+const userRouter = require('./controllers/user/userRouter'); 
 const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
 const sessionContent = require('./modules/sessions/expressSessionConfig'); //Session module with configuration 
 
@@ -25,6 +26,14 @@ app.use(morgan('tiny'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json())
 
+/*********** Session **************** */
+app.use(sessionContent);
+
+/*********** Passport  **************** */
+require('./controllers/security/passport/passportConfig')(passport); // Apply Passport Configuration
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 /********* Serve FrontEnd files *********** */
 //Serve a static websiste from the public folder
@@ -36,13 +45,10 @@ app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-/*********** Session **************** */
-app.use(sessionContent);
-
-/*********** Passport  **************** */
-require('./controllers/security/passport/passportConfig')(passport); // Apply Passport Configuration
-app.use(passport.initialize());
-app.use(passport.session());
+/*********** API Routing **************** */
+//Note: Client API will have a base /api/ for API routing 
+//Use User Router for routing user 
+app.use('/api/users', userRouter);
 
 
 /*********** Error Handling Modules **************** */

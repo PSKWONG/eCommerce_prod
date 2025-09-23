@@ -1,0 +1,67 @@
+{
+    "usersData": {
+        "uerInfo01": {
+            "id": 1,
+            "userName": "user01",
+            "email": "user01@testing.com",
+            "password": "tEsing%12345678910111213"
+        },
+        "uerInfo02": {
+            "id": 2,
+            "userName": "user02",
+            "email": "user02@testing.com",
+            "password": "tEsing%151413121110987654321"
+        }
+    },
+    "productData": {
+        "product01": {
+            "id": 1,
+            "product_name": "Lepismium bolivianum - Forest Cactus",
+            "unit_price": 14.97
+        },
+        "product02": {
+            "id": 4,
+            "product_name": "Golden Barrel Cactus Plant",
+            "unit_price": 12.99
+        }
+    },
+    "cartData": {
+        "cartRecord01": {
+            "user_id": 1,
+            "product_id": 1,
+            "quantity": 5
+        },
+        "cartRecord02": {
+            "user_id": 1,
+            "product_id": 4,
+            "quantity": 10
+        },
+        "LocalCartItem01": {
+            "product": {
+                "id": 1
+            },
+            "quantity": 5
+        },
+        "LocalCartItem02": {
+            "product": {
+                "id": 4
+            },
+            "quantity": 10
+        },
+        "LocalCart01": {
+            "4": {
+                "product": {
+                    "id": 4
+                },
+                "quantity": 100
+            },
+            "1": {
+                "product": {
+                    "id": 1
+                },
+                "quantity": 1
+            }
+            
+        }
+    }
+}

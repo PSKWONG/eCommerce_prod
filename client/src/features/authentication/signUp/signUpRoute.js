@@ -1,13 +1,17 @@
 
 
 /***************Import Internal Modules****************** */
-import SignUpComponent from '../signUp/signUpContainer'; 
+import SignUpComponent from '../signUp/signUpContainer';
 
 
 const signUpRoute = {
     path: "signup",
-    element: <SignUpComponent />
-   
+    element: <SignUpComponent />,
+    action: async ({ request }) => {
+        
+
+    }
+
 }
 
 export default signUpRoute; 

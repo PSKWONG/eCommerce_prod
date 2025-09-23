@@ -49,7 +49,8 @@ const authenticationController = {
                     //************************ Case of Success *************************/
                     //Pass the authenticated user Info to the next middlewre
                     req.authenticatedUser = user;
-                    return next();
+                    next();
+                    return;
 
                 }
             )(req, res, next)
@@ -59,7 +60,7 @@ const authenticationController = {
     autoLogin: (req, res, next) => {
 
         //Get the user Infromation 
-        const user = req.authenticatedUser;
+        const user = req.authenticatedUser || req.newUser;
 
         //Response Constructor 
         const response = responseConstructor();
