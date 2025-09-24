@@ -21,7 +21,7 @@ Redux Store to facilitate Authentication Function in this site
 const authenState = {
     data: {
         userInfo: null,
-        message:[]
+        message: []
     },
     status: {
         isAuthen: false,
@@ -33,10 +33,16 @@ const authenState = {
 const authenticationSlice = createSlice({
     name: 'authentication',
     initialState: authenState,
-    reducers:{
-        setErrorMsg: (state,action)=>{
-            state.data.message = action.payload; 
+    reducers: {
+        setErrorMsg: (state, action) => {
+            const isEmptyErrorMessage = (action.payload ?? []).length === 0;
+            state.data.message = isEmptyErrorMessage ? [] : action.payload;
+            state.status.isError = isEmptyErrorMessage ? false : true ; 
         }
+    },
+    selectors: {
+        selectErrorMsg: (state) => state.data.message,
+        selectErrorState: (state) => state.status.isError
     }
 })
 
@@ -44,14 +50,12 @@ const authenticationSlice = createSlice({
 export default authenticationSlice.reducer;
 
 //Export Actions 
-export const { 
-    setErrorMsg 
+export const {
+    setErrorMsg
 } = authenticationSlice.actions;
 
 //Export Store State
 export const {
-    selectAuthenStatus,
-    selectAuthenLoadingStatus,
-    selectUserInfo,
-    selectErrorMsg
+    selectErrorMsg,
+    selectErrorState
 } = authenticationSlice.selectors;

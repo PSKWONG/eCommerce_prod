@@ -28,6 +28,18 @@ button.greyOut:hover {
     cursor: default;
 }
 
+.errorMessageWrapper{
+    display:flex; 
+    flex-direction:column; 
+    flex-wrap:nowrap;
+    gap:5px;
+}
+
+.errorMessageWrapper{
+    font-size:0.95em;
+    font-weight:400;
+}
+
 
 /*Green Style for Components */ 
 .greenStyles {
@@ -54,7 +66,7 @@ button.greyOut:hover {
 }
 
 /*Orange Style for Components  */
-.oragngeStyles {
+.orangeStyles {
     background-color: rgb(207, 96, 52) !important;
     color: rgb(255, 255, 255) !important;
 }

@@ -15,7 +15,7 @@ import axiosStrategy from './axiosStrategy';
     *Since the name of the /api/ is subejct to change, the apiURLRedirect for this putpose.  
 */
 const apiURLRedirect = (url) => {
-    return `/api/${url}`
+    return `/api${url}`
 }
 
 

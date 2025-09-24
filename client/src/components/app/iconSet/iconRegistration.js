@@ -13,6 +13,8 @@ import { ReactComponent as Payment } from './images/paymenIcon.svg';
 import { ReactComponent as Order } from './images/packageIcon.svg';
 import { ReactComponent as Complete } from './images/completeIcon.svg';
 import { ReactComponent as BurgerMenu } from './images/burgerMenuIcon.svg';
+import { ReactComponent as Loading } from './images/loading.svg';
+
 
 
 
@@ -31,7 +33,8 @@ const iconRegistration = {
     payment: Payment,
     order:Order,
     complete:Complete,
-    burgerMenu: BurgerMenu
+    burgerMenu: BurgerMenu,
+    loading: Loading
 }
 
 export default iconRegistration; 

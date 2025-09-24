@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.346ef25a.css",
-    "main.js": "/static/js/main.cd3804b8.js",
+    "main.css": "/static/css/main.ec34ccc7.css",
+    "main.js": "/static/js/main.474132cc.js",
     "static/media/background01.jpg": "/static/media/background01.51b411c716514aa2a825.jpg",
     "static/media/accountIcon.svg": "/static/media/accountIcon.7084cebd3f5c236345ad6454a0d03ffb.svg",
     "static/media/storeIcon.svg": "/static/media/storeIcon.d916d01643356a166547c6711de71504.svg",
     "index.html": "/index.html",
+    "static/media/loading.svg": "/static/media/loading.ae2523bce49e5fdfe4f1fb4943e0dec3.svg",
     "static/media/bagIcon.svg": "/static/media/bagIcon.fbb173d1a778033417749df6b9e1dd6e.svg",
     "static/media/profileIcon.svg": "/static/media/profileIcon.cf6e1e17e8e6b11b3ef33f4672c88ccb.svg",
     "static/media/delivery.svg": "/static/media/delivery.b48efb9261c709612a9d290e912240a9.svg",
@@ -16,11 +17,11 @@
     "static/media/homeIcon.svg": "/static/media/homeIcon.4ca733d905a2a7886ede9c63bb995c3e.svg",
     "static/media/closeIcon.svg": "/static/media/closeIcon.239ce48e6844a6417090f4902fb09529.svg",
     "static/media/burgerMenuIcon.svg": "/static/media/burgerMenuIcon.6f6f6f8c58d6b9241a139eea1277aab9.svg",
-    "main.346ef25a.css.map": "/static/css/main.346ef25a.css.map",
-    "main.cd3804b8.js.map": "/static/js/main.cd3804b8.js.map"
+    "main.ec34ccc7.css.map": "/static/css/main.ec34ccc7.css.map",
+    "main.474132cc.js.map": "/static/js/main.474132cc.js.map"
   },
   "entrypoints": [
-    "static/css/main.346ef25a.css",
-    "static/js/main.cd3804b8.js"
+    "static/css/main.ec34ccc7.css",
+    "static/js/main.474132cc.js"
   ]
 }

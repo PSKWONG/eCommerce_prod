@@ -4,27 +4,27 @@ Response Constuctor
 - Front End can standarise on digesting the information from API response 
 */
 
-//Structure of the reponse object 
-
-const defaultReponse = (
-    {
-        info: {}, //default to be a JS obkect
-        path: '', //default to be a String
-        message: [] // default to be a array of string 
-    }
-)
-
 
 
 const responseConstructor = () => {
 
+    //Structure of the reponse object 
+
+    const defaultReponse = (
+        {
+            info: {}, //default to be a JS obkect
+            path: '', //default to be a String
+            message: [] // default to be a array of string 
+        }
+    )
+
     //Basic Structure of the response object 
-    const response = defaultReponse; 
+    const response = defaultReponse;
 
     //Actions for mutating 
     const setInfo = (type, inputData) => {
 
-        
+
         //Default catergories of Information passed
         //>>>>>>> Avoid the miss using of keywords on getting information 
         const whiteList = ['users', 'products', 'authen', 'cart', 'order'];
