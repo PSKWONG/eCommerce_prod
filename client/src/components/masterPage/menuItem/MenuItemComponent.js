@@ -15,22 +15,27 @@ Menu Item Component
 
 /***************Import external Modules****************** */
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 /***************Import Internal Modules****************** */
 import styles from './menuItem.module.css';
 import IconSet from '../../app/iconSet/IconComponents';
+import { selectAuthenState } from '../../../features/authentication/authenticationSlice';
 
 const MenuItemComponent = (props) => {
 
+    
 
     //Hook's Action 
     const navigate = useNavigate();
 
+    //Get infromation from Redux Store 
+    const authenStatus = useSelector(selectAuthenState) ?? false; 
 
     //Get data for menu items 
     const type = props?.type ?? 'text';
     const menuItemData = props?.data ?? {};
-    const { label, path, ref, authenStatus } = menuItemData;
+    const { label, path, ref } = menuItemData;
 
     //Actions
     const handleRedirect = (event) => {
@@ -43,11 +48,11 @@ const MenuItemComponent = (props) => {
 
     switch (true) {
 
-        case (authenStatus && ref==='guest'):
-           break; 
+        case (authenStatus && ref === 'guest'):
+            break;
 
-        case (!authenStatus && ref==='user'):
-           break; 
+        case (!authenStatus && ref === 'user'):
+            break;
 
         case (type === 'icon'):
             return (

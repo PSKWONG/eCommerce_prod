@@ -1,11 +1,13 @@
 /***************Import Internal Modules****************** */
 import { useEffect } from 'react';
 import { useActionData, useNavigation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 /***************Import Internal Modules****************** */
 import SignUpComponent from './signUpComponent';
-import { setErrorMsg, setErrorStates } from '../authenticationSlice';
+import authenChecking from '../helperFunctions/authenticationChecking';
+import { setErrorMsg } from '../authenticationSlice';
+import { selectAuthenState, selectLoadingStatus } from '../authenticationSlice';
 
 const SignUpContainer = () => {
 
@@ -14,7 +16,7 @@ const SignUpContainer = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
-    
+
 
     /*************** Handle Data from Router ****************** */
     /*
@@ -42,16 +44,25 @@ const SignUpContainer = () => {
 
 
     /*************** Page Navigation Control ****************** */
+    const authenStatus = useSelector(selectAuthenState);
+    const isLoading = useSelector(selectLoadingStatus);
 
-
-    //Effect Hook on Success Sign Up ( Phase : Directing Page )
+    //Effect Hook on controlling page navigation
     useEffect(() => {
         if (success) {
+            //Authentication status will update
+            dispatch(authenChecking());
+            //Redirect to the Home Page ( Phase 2 , Previously Page )
             navigate('/');
-        }
+        } 
 
-    }, [success, navigate])
+    }, [success, navigate, dispatch])
 
+    //Authenticated user will redirect to the home page 
+    if (authenStatus && !isLoading) {
+        navigate('/');
+        return;
+    }
 
     /*************** Button Actions ****************** */
     //Login Button
@@ -76,7 +87,19 @@ const SignUpContainer = () => {
     }
 
 
-    return <SignUpComponent control={exportedData} />
+    return (
+        <>
+            {
+                !isLoading &&
+                <SignUpComponent control={exportedData} />
+
+            }
+        </>
+    )
+
+
+
+
 }
 
 export default SignUpContainer; 

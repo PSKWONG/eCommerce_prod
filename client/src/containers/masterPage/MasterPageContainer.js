@@ -9,6 +9,7 @@ import useMenuController from './hook/menuController';
 import useBackgroundController from './hook/backgroundController';
 import useResponsivecontroller from './hook/responsiveLayoutController';
 import usePortalController from '../../containers/portal/hook/portController';
+import useAuthenticationChecking from '../../features/authentication/hook/getAuthenStatus'; 
 import PortalMenu from '../../components/masterPage/portalMenu/PortalMenu';
 import MasterPageComponent from '../../components/masterPage/MasterPageComponent';
 
@@ -25,6 +26,8 @@ const MasterPageContainer = React.memo(() => {
     //Hook for Responsive Control 
     useResponsivecontroller(windowSize);
 
+    //Get Authentication State for the site
+    useAuthenticationChecking(); 
 
     // Hook for Background Control ( Initial Phase ) 
     useBackgroundController();

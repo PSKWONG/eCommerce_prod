@@ -2,6 +2,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 
+/***************Import Internal Modules****************** */
+import authenticationStatusChecking from './helperFunctions/authenticationChecking';
+
+
 /*
 Redux Store to facilitate Authentication Function in this site
 ## Function 
@@ -24,7 +28,7 @@ const authenState = {
         message: []
     },
     status: {
-        isAuthen: false,
+        isAuthen: null,
         isLoading: false,
         isError: false,
     }
@@ -37,12 +41,32 @@ const authenticationSlice = createSlice({
         setErrorMsg: (state, action) => {
             const isEmptyErrorMessage = (action.payload ?? []).length === 0;
             state.data.message = isEmptyErrorMessage ? [] : action.payload;
-            state.status.isError = isEmptyErrorMessage ? false : true ; 
+            state.status.isError = isEmptyErrorMessage ? false : true;
         }
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(authenticationStatusChecking.pending, (state) => {
+                state.status.isLoading = true;
+            })
+            .addCase(authenticationStatusChecking.fulfilled, (state, action) => {
+                state.status.isLoading = false;
+                state.status.isError = false;
+                state.status.isAuthen = action.payload.success;
+                state.data.message = action.payload.message; 
+            })
+            .addCase(authenticationStatusChecking.rejected, (state, action) => {
+                state.status.isLoading = false;
+                state.status.isError = true;
+                state.status.isAuthen = false;
+                state.data.message = action?.error?.message;
+            })
+    },
     selectors: {
+        selectAuthenState: (state) => state.status.isAuthen, 
         selectErrorMsg: (state) => state.data.message,
-        selectErrorState: (state) => state.status.isError
+        selectErrorState: (state) => state.status.isError, 
+        selectLoadingStatus : (state) => state.status.isLoading
     }
 })
 
@@ -57,5 +81,7 @@ export const {
 //Export Store State
 export const {
     selectErrorMsg,
-    selectErrorState
+    selectErrorState,
+    selectAuthenState,
+    selectLoadingStatus
 } = authenticationSlice.selectors;

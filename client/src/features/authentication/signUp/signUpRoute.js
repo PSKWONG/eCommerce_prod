@@ -14,6 +14,9 @@ import api from '../../../api/apiConnector';
 const signUpRoute = {
     path: "signup",
     element: <SignUpComponent />,
+    loader:async()=>{
+        //Phase 2 - Get Error Message from Authentication failure 
+    },
     action: async ({ request }) => {
 
         //Feedback for Sign Up Component 

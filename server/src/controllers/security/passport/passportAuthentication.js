@@ -24,9 +24,9 @@ const authenticationController = {
                 Reason: The strategy is not available. Please check the spelling of the strategy. 
                 Available Strategies : ${availableStrategies.join(', ')}
                 `
-                )
-
-                return next(new Error)
+                );
+                next(new Error);
+                return;
             }
 
             passport.authenticate(
@@ -62,56 +62,70 @@ const authenticationController = {
         //Get the user Infromation 
         const user = req.authenticatedUser || req.newUser;
 
-        //Response Constructor 
-        const response = responseConstructor();
+        req.login(
+            user,
+            (err) => {
 
-        req.login(user, (err) => {
+                //##### Edge Case - If Error occur during the login process, throw Error object 
+                if (err) {
+                    return next(err);
+                }
 
-            if (err) {
-                return next(err);
+                //Response Construction for success Login 
+                const response = responseConstructor();
+                response.setPath(process.env.AUTH_SUCCESS_URL);
+                return res.status(200).json(response.build());
+
             }
-
-            //Axios Response 
-            response.setPath(process.env.AUTH_SUCCESS_URL);
-            return res.status(200).json(response.build());
-
-        })
+        )
     },
 
     logOut: (req, res) => {
 
-        const response = responseConstructor();
-
         req.logOut(() => {
-            //LogOut Call back function 
+            const response = responseConstructor();
             response.setPath('/');
-            return res.status(200).json(response.build());
+            res.status(200).json(response.build());
+            return;
         })
     },
 
     checking: (req, res, next) => {
-
-        const response = responseConstructor();
+        /*
+        Checking the authentication Status 
+        - Success: Continue the next middleware 
+        - Failure: Return a failure response 
+        //////////////// Logic /////////////////
+        * req.isAuthenticated() is a passport.js function 
+        which check whether [req.user] is existed; 
+        */
 
         //Checking 
         //console.log('Cookies:', req.cookies);
         //console.log('Session:', req.session);
         //console.log('User:', req.user);
 
-        //Deserialization of passport is initiated to check
+        //Passport Checking 
         if (req.isAuthenticated()) {
-            return next();
+            next();
+            return;
         }
 
-        //Axios Response 
+        //## Edge Case - Failure on Authentication 
+        const response = responseConstructor();
         response.setPath(process.env.AUTH_FAILURE_URL);
-        return res.status(400).json(response.build());
+        response.setMessage('Page requested is restricted to authenticated user. Please singup / login.')
+        res.status(400).json(response.build());
+        return;
     },
 
-    successAuthen: (req, res, next) => {
+    successAuthen: (req, res) => {
+
+        //Response construction
         const response = responseConstructor();
-        response.setMessage('Successfully Logging In')
+        response.setMessage('Successfully Logging In');
         res.status(200).json(response.build());
+        return;
     }
 
 }

@@ -8,8 +8,10 @@ const errorhandler = require('errorhandler'); // Error handler in development en
 
 /********* Import Internal Modules *********** */
 const userRouter = require('./controllers/user/userRouter'); 
+const authenRouter = require('./controllers/security/autheticationRouter'); 
 const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
 const sessionContent = require('./modules/sessions/expressSessionConfig'); //Session module with configuration 
+
 
 
 
@@ -41,14 +43,15 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 //The * symbol will match any route that is not matched by other middleware
 //This will allow React routes to work
-app.get('/*', (req, res) => {
+app.get(/^\/(?!api\/).*/, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
 /*********** API Routing **************** */
 //Note: Client API will have a base /api/ for API routing 
-//Use User Router for routing user 
+app.disable('etag');
 app.use('/api/users', userRouter);
+app.use('/api/authen', authenRouter);
 
 
 /*********** Error Handling Modules **************** */

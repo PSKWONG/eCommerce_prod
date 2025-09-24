@@ -43,7 +43,16 @@ const passportConfig = (passport) => {
             done(null, user);
 
         } catch (err) {
-            return done(err);
+
+            //Internal Log 
+            console.log(
+                `
+                Error occurs in Authentication / Deserialisation 
+                Error: ${err}
+                `
+            ); 
+            done(err);
+            return;
         }
 
 

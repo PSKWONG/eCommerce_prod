@@ -106,7 +106,7 @@ const basicSchema = {
                         }
                         return true;
                     } catch (err) {
-                        throw new Error();
+                        throw new Error(err.message);
                     }
                 }
             }

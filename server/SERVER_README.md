@@ -2,12 +2,14 @@
 Created: 05 April 2025
 Last Updated: 11 Setptember 2025
 
+# Point to note 
+## Request Object Setting
+* req.user is reserved for authentication.
+
+
 
 # Common Utilities
-
-## Response Constructor 
-* **Aim** : Standardise structure of response. Front End can standarise on digesting the information from API response 
-
+## Common Utilities -  Response Constructor 
 * **Structure of Reponse** : 
     {
         info: {}, //default to be a JS **object**
