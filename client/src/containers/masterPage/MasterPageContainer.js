@@ -4,7 +4,6 @@ import React, { createContext } from 'react';
 
 
 /***************Import Internal Modules****************** */
-import useWindowObserver from '../app/hook/windowSizeObserver';
 import useMenuController from './hook/menuController';
 import useBackgroundController from './hook/backgroundController';
 import useResponsivecontroller from './hook/responsiveLayoutController';
@@ -19,23 +18,18 @@ export const MasterPageContext = createContext(null);
 
 const MasterPageContainer = React.memo(() => {
 
-    //Hook for Providing Window Size 
-    const windowSize = useWindowObserver();
-
-
-    //Hook for Responsive Control 
-    useResponsivecontroller(windowSize);
-
     //Get Authentication State for the site
     useAuthenticationChecking(); 
 
-    // Hook for Background Control ( Initial Phase ) 
+     // Hook for Background Control ( Initial Phase ) 
     useBackgroundController();
 
+    //Hook for Responsive Control 
+    //useResponsivecontroller(windowSize);
+    const layout = useResponsivecontroller().data.layout;
+
     //Hook for creating menuController 
-    const menuController = useMenuController(windowSize);
-
-
+    const menuController = useMenuController(layout);
 
     //Hook for Portal Control
     const portalController = usePortalController(PortalMenu);

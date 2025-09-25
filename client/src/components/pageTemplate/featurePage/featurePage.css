@@ -29,10 +29,22 @@ Banner Wrapper for Feature Page Template
 */
 .featurePageWrapper>.bannerWrapper{
     width:100%;
+    min-height: 50vh;
     background-size:cover; 
     background-repeat:no-repeat; 
     background-position:center; 
+}
 
+
+.featurePageWrapper>.bannerWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content:center; 
+    align-items: center; 
+}
+
+.bannerWrapper>.contentWrapper{
+    min-height:100%;
 }
 
 
@@ -41,19 +53,25 @@ Content Wrapper for Feature Page Template
 - Control the width of the Content 
 */
 
+.bannerWrapper>.contentWrapper,
 .featurePageWrapper>.contentWrapper {
     width: 90%;
     max-width: var(--contentMaxWidth);
-    min-height: 90%;
-
 }
 
 
 /*
 ******************* Responsive Style ******************* 
 */
+
+body.desktop .featurePageWrapper>.bannerWrapper>.contentWrapper,
 body.desktop .featurePageWrapper>.contentWrapper {
     width: 50%;
-    min-height: 50%;
     max-width: var(--contentMaxWidth);
+}
+
+
+body.desktop .featurePageWrapper>.bannerWrapper,
+body.tablet .featurePageWrapper>.bannerWrapper {
+    min-height:35vh;
 }

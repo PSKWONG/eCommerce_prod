@@ -23,6 +23,7 @@ const FeaturePageContainer = ({ children, banner }) => {
     //Update banner content
     useEffect(() => {
 
+        //Check if the input is a REACT function 
         if (typeof content === 'function') {
 
             try {

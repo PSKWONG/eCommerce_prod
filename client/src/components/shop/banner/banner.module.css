@@ -1,0 +1,33 @@
+.sloganWrapper{
+    display:flex;
+    flex-direction:column;
+    justify-content:center; 
+    align-items:center; 
+}
+
+.sloganWrapper {
+    width: 100%;
+    min-height:100%;
+}
+
+
+.sloganWrapper h1{
+    color: white;
+    font-size: 5em;
+
+}
+
+.sloganWrapper strong {
+    color: rgb(162, 179, 164);
+    font-weight: 900;
+}
+
+/*********** Responseive Styles ***********/
+:global(body.desktop) .sloganWrapper,
+:global(body.tablet) .sloganWrapper
+{
+    flex-direction:row;
+    justify-content:center; 
+    align-items:center;
+}
+

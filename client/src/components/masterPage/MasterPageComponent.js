@@ -24,7 +24,7 @@ Masterpage is mainly composed of the following components
 */
 
 
-const MasterPageComponent = () => {
+const MasterPageComponent = React.memo(() => {
 
     //Get the data from container 
     const { data, actions } = useContext(MasterPageContext) ?? {};
@@ -90,6 +90,6 @@ const MasterPageComponent = () => {
         </>
     )
 
-}
+}); 
 
 export default MasterPageComponent; 

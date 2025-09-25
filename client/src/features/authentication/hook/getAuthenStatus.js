@@ -4,18 +4,22 @@ Hook for containers
 */
 
 /***************Import External Modules****************** */
-import {useDispatch} from 'react-redux'; 
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 /***************Import Internal Modules****************** */
-import authenticationStatusChecking from '../helperFunctions/authenticationChecking'; 
+import authenticationStatusChecking from '../helperFunctions/authenticationChecking';
 
 
 
-const useAuthenticationChecking = ()=>{
+const useAuthenticationChecking = () => {
 
-    //Hook Actions 
-    const dispatch = useDispatch(); 
-    dispatch(authenticationStatusChecking()); 
+     //Hook Actions 
+        const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(authenticationStatusChecking());
+    }, [dispatch])
 
 }
 

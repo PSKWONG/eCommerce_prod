@@ -19,52 +19,65 @@ import { useState, useEffect } from 'react';
 /***************Import Internal Modules****************** */
 import responsiveGuide from '../data/responsiveGuide.json';
 
-
-
-
-const useResponsiveController = (windowSize) => {
+const useResponsiveController = () => {
 
     //States for Menu Item Control 
-    const [pageWidth, setPageWidth] = useState(window.innerWidth);
+    //const [pageWidth, setPageWidth] = useState(window.innerWidth);
+    const [layout, setLayout] = useState('desktop');
 
-    //Response to change of window size 
+
     useEffect(() => {
-        if (windowSize) {
-            setPageWidth(windowSize);
+
+
+        //Helper Function on updating the layout State
+        const layoutUpdate = () => {
+
+            //Get the value from HTML document 
+            const pageWidth = window.innerWidth;
+            const body = document.body;
+
+            // Clear previous layout classes
+            body.classList.remove('mobile', 'tablet', 'desktop');
+
+
+            //Update the layout when it match the breakpoint of responsive layout 
+            switch (true) {
+                case (pageWidth <= responsiveGuide['mobile']):
+                    body.classList.add('mobile');
+                    setLayout('mobile');
+                    break;
+
+                case (pageWidth <= responsiveGuide['tablet']):
+                    body.classList.add('tablet');
+                    setLayout('tablet');
+                    break;
+
+
+                default:
+                    body.classList.add('desktop');
+                    setLayout('desktop');
+                    break;
+
+            }
         }
-    }, [windowSize])
 
-    //Set Body Class List 
+        //Add a Event Listener for the Windows Resize
+        window.addEventListener('resize', layoutUpdate);
 
-    useEffect(()=>{
-
-        const body = document.body;
-
-        switch (true){
-            case (pageWidth <= responsiveGuide['mobile']):
-                body.classList.add('mobile');
-                break;
-
-            case (pageWidth <= responsiveGuide['tablet']):
-                body.classList.add('tablet');
-                break;
+        layoutUpdate();
 
 
-            default:
-                body.classList.add('desktop');
-                break;
+    }, [])
 
+
+    //Exported Data 
+    return {
+        data: {
+            layout
         }
-
-
-        //Reset the class list of the body element 
-        return ()=>{
-            body.classList.remove('mobile', 'tablet', 'desktop')
-        }
-
-    }, [pageWidth])
-
+    }
 
 }
+
 
 export default useResponsiveController; 

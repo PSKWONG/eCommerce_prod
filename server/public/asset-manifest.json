@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.457d04e7.css",
-    "main.js": "/static/js/main.8d6beb5f.js",
+    "main.css": "/static/css/main.7d3c6bb8.css",
+    "main.js": "/static/js/main.53f2dcff.js",
     "static/media/background01.jpg": "/static/media/background01.51b411c716514aa2a825.jpg",
+    "static/media/plant_banner01.jpg": "/static/media/plant_banner01.478274c4dcdf9f8f1c90.jpg",
     "static/media/accountIcon.svg": "/static/media/accountIcon.7084cebd3f5c236345ad6454a0d03ffb.svg",
     "static/media/storeIcon.svg": "/static/media/storeIcon.d916d01643356a166547c6711de71504.svg",
     "index.html": "/index.html",
@@ -17,11 +18,11 @@
     "static/media/homeIcon.svg": "/static/media/homeIcon.4ca733d905a2a7886ede9c63bb995c3e.svg",
     "static/media/closeIcon.svg": "/static/media/closeIcon.239ce48e6844a6417090f4902fb09529.svg",
     "static/media/burgerMenuIcon.svg": "/static/media/burgerMenuIcon.6f6f6f8c58d6b9241a139eea1277aab9.svg",
-    "main.457d04e7.css.map": "/static/css/main.457d04e7.css.map",
-    "main.8d6beb5f.js.map": "/static/js/main.8d6beb5f.js.map"
+    "main.7d3c6bb8.css.map": "/static/css/main.7d3c6bb8.css.map",
+    "main.53f2dcff.js.map": "/static/js/main.53f2dcff.js.map"
   },
   "entrypoints": [
-    "static/css/main.457d04e7.css",
-    "static/js/main.8d6beb5f.js"
+    "static/css/main.7d3c6bb8.css",
+    "static/js/main.53f2dcff.js"
   ]
 }

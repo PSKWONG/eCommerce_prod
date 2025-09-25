@@ -16,14 +16,16 @@ const FeaturePageComponent = ({ children, bannerControl }) => {
             {
                 (bkgImage && bannerContent) && (
                     <div className={`bannerWrapper `} style={{ backgroundImage: `url(${bkgImage})` }}>
-                        {bannerContent}
+                        <div className={`contentWrapper `} >
+                            {bannerContent}
+                        </div>
                     </div>
                 )
             }
 
             <div className={`contentWrapper `}>
                 {children}
-                banner Content 
+                Feature Content
             </div>
         </div>
     )

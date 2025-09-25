@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 /***************Import Internal Modules****************** */
 import menuItems from '../data/menuItems.json';
-import responsiveGuide from '../data/responsiveGuide.json';
 
 
 /*
@@ -42,10 +41,10 @@ This app has following types of menu
 */
 
 
-const useMenuController = (windowSize) => {
+const useMenuController = (pageLayout) => {
 
     //States for Menu Item Control 
-    const [pageWidth, setPageWidth] = useState(window.innerWidth);
+    const [layout, setLayout] = useState('desktop');
     const [navMenuItems, setNavMenuItems] = useState([]);
     const [funcMenuItems, setFuncMenuItems] = useState([]);
     const [mobileMenuItems, setMobileMenuItems] = useState([]);
@@ -54,14 +53,12 @@ const useMenuController = (windowSize) => {
 
     //Response to change of window size 
     useEffect(() => {
-        if (windowSize) {
-            setPageWidth(windowSize);
-        }
-    }, [windowSize])
+            setLayout(pageLayout);
+    }, [pageLayout])
 
     //Menu Items distribution 
     useEffect(() => {
-        if (pageWidth <= responsiveGuide['mobile']) {
+        if (layout === 'mobile') {
             setMobileMenuItems(
                 menuItems
                     .filter((item) => item.type === 0 || item.type === 2)
@@ -79,7 +76,7 @@ const useMenuController = (windowSize) => {
             setFuncMenuItems([]);
 
 
-        } else if (pageWidth <= responsiveGuide['tablet']) {
+        } else if (layout === 'tablet') {
 
             setNavMenuItems(
                 menuItems
@@ -119,7 +116,7 @@ const useMenuController = (windowSize) => {
             );
 
         }
-    }, [pageWidth])
+    }, [layout])
 
 
 
