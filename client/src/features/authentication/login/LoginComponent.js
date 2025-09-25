@@ -27,7 +27,7 @@ const SignUpComponent = (props) => {
     return (
         <div>
 
-            <h1>Sign Up</h1>
+            <h1>Login</h1>
 
             {
                 errorStatus &&
@@ -48,14 +48,10 @@ const SignUpComponent = (props) => {
                     <label>Password: </label>
                     <input name="password" type='password' />
                 </div>
-                <div>
-                    <label>Confirm password: </label>
-                    <input name="passwordCheck" type='password' />
-                </div>
 
                 <button type="submit">
                     {!(data?.status?.isSubmitting ?? false) &&
-                        <>SIGN UP by Email </>
+                        <>LOGIN by Email </>
                     }
                     
                     { (data?.status?.isSubmitting ?? false) &&
@@ -67,11 +63,11 @@ const SignUpComponent = (props) => {
             </Form>
 
             <div className={` ${boxStyles.section} ${pageStyles.greenStyles}`}>
-                <span><strong>Or</strong> sign up through: </span>
+                <span><strong>Or</strong> Login through: </span>
             </div>
 
             <div className={`${boxStyles.section} ${pageStyles.yellowStyles}`}>
-                Already member? Login here: <button onClick={actions.handleLogin}> LOGIN </button>
+                NOT yet a member? Signup here: <button onClick={actions.handleSignUp} > SIGNUP </button>
             </div>
 
         </div>

@@ -2,7 +2,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 
 /***************Import Internal Modules****************** */
-const { userDB } = require('../../../models/userDB');
+const userDB = require('../../../models/userDB');
 const securityHelpers = require('../securityHelperFunctions');
 
 /*
@@ -46,6 +46,9 @@ const localPassport = (passport) => {
             console.log(
                 `
                 Unexpected Error in Authentication: Local Authentication 
+                Input: 
+                    - email${email}
+                    - password: N/A 
                 Error: ${err}
                 `
             )
