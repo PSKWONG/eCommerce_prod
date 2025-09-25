@@ -82,6 +82,20 @@ const passwordFieldChecking = (fieldName) => {
     }
 }
 
+const integerChecking = (fieldName) => {
+
+    return {
+        [fieldName]: {
+            in: ['body'],
+            trim: true, // removes leading/trailing whitespace
+            toInt: true, // converts to integer
+            isInt: {
+                errorMessage: `${fieldName} must be a whole number`
+            }
+        }
+    }
+}
+
 
 /* 
 ************* Basic Schema for different Controllers  *******************
@@ -113,6 +127,15 @@ const basicSchema = {
         },
         'password': {
             ...passwordFieldChecking('Password')
+        }
+    },
+    products:{
+        'categoryId':{
+            optional: true,
+            ...integerChecking('Category ID')
+        },
+        'productID':{
+            ...integerChecking('Product ID')
         }
     }
 

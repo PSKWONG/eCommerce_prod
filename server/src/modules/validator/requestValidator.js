@@ -33,6 +33,9 @@ const requestInputValidation = {
 
         }
     },
+    products:{
+        listing: {...basicSchema.products}
+    },
 
     getValidationErrors: async (schema, inputs) => {
 

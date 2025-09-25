@@ -20,7 +20,7 @@ const localUser = {
         const response = responseConstructor();
 
         // Run validations for each section
-        const inputs = req.body.users || req.body;
+        const inputs = req?.body?.users || req?.body;
         const schema = requestValidation.users.create;
         const validationErrors = await requestValidation.getValidationErrors(schema, inputs);
 

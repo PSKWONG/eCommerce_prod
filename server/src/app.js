@@ -9,6 +9,7 @@ const errorhandler = require('errorhandler'); // Error handler in development en
 /********* Import Internal Modules *********** */
 const userRouter = require('./controllers/user/userRouter'); 
 const authenRouter = require('./controllers/security/autheticationRouter'); 
+const productRouter = require('./controllers/product/productController'); 
 const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
 const sessionContent = require('./modules/sessions/expressSessionConfig'); //Session module with configuration 
 
@@ -49,8 +50,8 @@ app.get(/^\/(?!api\/).*/, (req, res) => {
 
 /*********** API Routing **************** */
 //Note: Client API will have a base /api/ for API routing 
-app.disable('etag');
 app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
 app.use('/api/authen', authenRouter);
 
 

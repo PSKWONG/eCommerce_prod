@@ -20,9 +20,7 @@ const productDB = {
             );
 
             const input = [id];
-
             const result = await dbQuery(query, input);
-
             return result.rows.length ? result.rows : null;
 
         } catch (err) {
