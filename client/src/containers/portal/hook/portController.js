@@ -1,9 +1,3 @@
-/***************Import external Modules****************** */
-import React, { useState, useEffect } from 'react';
-
-/***************Import Internal Modules****************** */
-import PortalTemplate from '../../../components/portal/portComponent';
-
 /*
 This hook is used to put the content into a Portal Template.
 ## Input: 
@@ -15,6 +9,13 @@ This hook is used to put the content into a Portal Template.
 - visibleContent is the content to display after checking 
 
 */
+
+/***************Import external Modules****************** */
+import React, { useState, useEffect } from 'react';
+
+/***************Import Internal Modules****************** */
+import PortalTemplate from '../../../components/portal/portComponent';
+
 
 const usePortalController = (content) => {
 

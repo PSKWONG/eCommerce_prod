@@ -1,14 +1,14 @@
 /*
-Style Sheet for Single Page Template
+Style Sheet for Feature Page Template
 */
 
 /*
 Outter Most Wrapper for positioning the Page 
-- Content place at the middle of the page 
 - Margin top and bottom with other components 
+- Content Box arrange in column 
 */
 
-.singlePageWrapper {
+.featurePageWrapper {
 
     width: 100%;
     min-height: 100%;
@@ -17,19 +17,31 @@ Outter Most Wrapper for positioning the Page
 
 }
 
-.singlePageWrapper {
+.featurePageWrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
 /*
-Content Wrapper for Single Page Template 
+Banner Wrapper for Feature Page Template 
+- Extend full width of the banner 
+*/
+.featurePageWrapper>.bannerWrapper{
+    width:100%;
+    background-size:cover; 
+    background-repeat:no-repeat; 
+    background-position:center; 
+
+}
+
+
+/*
+Content Wrapper for Feature Page Template 
 - Control the width of the Content 
 */
 
-.singlePageWrapper>.contentWrapper {
+.featurePageWrapper>.contentWrapper {
     width: 90%;
     max-width: var(--contentMaxWidth);
     min-height: 90%;
@@ -40,7 +52,7 @@ Content Wrapper for Single Page Template
 /*
 ******************* Responsive Style ******************* 
 */
-body.desktop .singlePageWrapper>.contentWrapper {
+body.desktop .featurePageWrapper>.contentWrapper {
     width: 50%;
     min-height: 50%;
     max-width: var(--contentMaxWidth);

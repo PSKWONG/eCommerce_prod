@@ -10,6 +10,7 @@ Master Page Style Sheet
     --contentPadding: 10;
     --masterPaddingTop: calc((var(--masterHeaderHeight)) * 1px);
     --masterPaddingBottom: calc((var(--masterMobileMenuHeight)) * 1px);
+    --contentMaxWidth: 90%; 
 
 }
 
@@ -87,6 +88,15 @@ Master Page Style Sheet
     transform: translateZ(0);
     display:none;
 
+
+}
+
+/*
+******************* Responsive Style  ******************* 
+*/
+
+body.desktop .masterContentWrapper {
+    --contentMaxWidth: 1100px; 
 
 }
 

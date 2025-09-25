@@ -9,7 +9,7 @@ const errorhandler = require('errorhandler'); // Error handler in development en
 /********* Import Internal Modules *********** */
 const userRouter = require('./controllers/user/userRouter'); 
 const authenRouter = require('./controllers/security/autheticationRouter'); 
-const productRouter = require('./controllers/product/productController'); 
+const productRouter = require('./controllers/product/productRoute'); 
 const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
 const sessionContent = require('./modules/sessions/expressSessionConfig'); //Session module with configuration 
 
