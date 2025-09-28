@@ -4,15 +4,37 @@
 import { useContext } from 'react';
 
 /***************Import Internal Modules****************** */
-//import styles from './shopItem.module.css';
-import { ShopDataSharing } from '../../../containers/shop/shopListing/shopListingContainer'; 
+import './detail.css';
+import { ShopDataSharing } from '../../../containers/shop/shopListing/shopListingContainer';
 
-const ProductDetail = ()=>{
+const ProductDetail = () => {
 
     //Extract Data from pros
-    const { product_name, image_path, unit_price } = useContext(ShopDataSharing)?.shopListController?.data?.selectedItem ??{}; 
+    const selectedItem = useContext(ShopDataSharing)?.shopListController?.data?.selectedItem ?? {};
+    const { product_name, description, image_path, unit_price } = selectedItem;
 
-    return <>hello!{product_name}</>
+    return (
+        <div className={`productDetailWrapper`}>
+            <div className={`contentWrapper`}>
+                <div className={`productWrapper`}>
+                    <img src={`/assets/images/productimage/${image_path}`} alt={product_name} />
+                    <div>
+                        <div className={`basicInfoWrapper`}>
+                            <h1>{product_name ?? ''}</h1>
+                            <div>
+                                <span>{`£ ${unit_price ?? 'Unavaliable'}`}</span>
+
+                            </div>
+                        </div>
+                        <p>
+                            {description ?? ''}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    )
 }
 
 export default ProductDetail; 

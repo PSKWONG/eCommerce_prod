@@ -1,0 +1,119 @@
+/*
+Style Sheet for prodcut details
+*/
+
+/* Variable for prodcut detail page */
+.productDetailWrapper {
+    --bkgColor: rgb(211, 191, 101);
+}
+
+/* Prodcut detail wrapper styles */
+.productDetailWrapper {
+    min-width: 100%;
+    min-height: 100%;
+    background-color: var(--bkgColor);
+}
+
+.productDetailWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Prodcut content wrapper styles */
+.productDetailWrapper>.contentWrapper {
+    width: 80%;
+    max-width: 90vw;
+    min-height: 90vh;
+    background-color: var(--bkgColor) !important;
+    position: relative;
+}
+
+.productDetailWrapper>.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+/***** Structure of the Product Wrapper *****/
+.productWrapper {
+    flex-basis: 300px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.productWrapper {
+    position: relative;
+}
+
+.productWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.productWrapper img {
+    flex-basis: 200px;
+    flex-grow: 0;
+}
+
+
+.productWrapper img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border: 5px solid white;
+    object-fit: cover;
+}
+
+.productWrapper p {
+    padding: 3px;
+}
+
+/***** Basic Information Wrapper *****/
+.basicInfoWrapper {
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
+.basicInfoWrapper {
+    background-color: var(--bkgColor);
+    padding: 10px 0px;
+}
+
+.basicInfoWrapper h1 {
+    margin: 5px 0px;
+
+}
+
+.basicInfoWrapper span {
+    color: white;
+    font-weight: 700;
+    font-size: 1.3em;
+
+}
+
+/***** Price Listing Wrapper *****/
+
+
+/***** Detail Wrapper *****/
+.detailWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+/***** Responsive Styles *****/
+body.desktop .productDetailWrapper>.contentWrapper {
+    max-width: 1050px;
+    min-height: 50vh;
+}
+
+
+body.desktop .productWrapper {
+    flex-direction: row;
+    gap: 30px;
+}
