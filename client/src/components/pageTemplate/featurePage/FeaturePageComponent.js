@@ -25,7 +25,6 @@ const FeaturePageComponent = ({ children, bannerControl }) => {
 
             <div className={`contentWrapper `}>
                 {children}
-                Feature Content
             </div>
         </div>
     )

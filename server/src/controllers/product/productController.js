@@ -44,7 +44,7 @@ const productController = {
         //Update the category ID 
         //Destructuring the request body
         const { categoryId } = inputs;
-        req.products.categoryId = categoryId || 2;
+        req.products = { categoryId: categoryId || 2 };
 
         res.status(204).send();
 
@@ -52,23 +52,33 @@ const productController = {
 
     },
 
-    getProductListbyCategoryID: async (req, res) => {
+    getProductListbyCategoryID: async (req, res, next) => {
 
         // Construct Response Object
         const response = responseConstructor();
 
         // Get the category ID from request object 
-        const catID = req?.session?.products?.categoryId ?? 2;
+        const catID = req?.products?.categoryId ?? 2;
+
+        
 
         try {
 
             //Start get product List 
             const result = await productDB.findByCategory(catID);
 
+            //Checking
+            console.log(
+                `
+                Input : ${catID}
+                Result : ${result}
+                `
+            )
+
             // Construct Response Object
-            response.setData('products', result);
+            response.setInfo('products', result);
             res.status(200).json(response.build());
-            return; 
+            return;
 
 
 
@@ -80,8 +90,8 @@ const productController = {
                 Input: ${catID},
                 Error: ${err}
                 `);
-            next(err); 
-            return; 
+            next(err);
+            return;
         }
 
     }

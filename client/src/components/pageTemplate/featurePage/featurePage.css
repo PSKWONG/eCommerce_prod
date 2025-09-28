@@ -52,6 +52,10 @@ Banner Wrapper for Feature Page Template
 Content Wrapper for Feature Page Template 
 - Control the width of the Content 
 */
+.featurePageWrapper>.contentWrapper {
+    flex-basis:100px;
+    flex-grow:1; 
+}
 
 .bannerWrapper>.contentWrapper,
 .featurePageWrapper>.contentWrapper {
@@ -66,7 +70,7 @@ Content Wrapper for Feature Page Template
 
 body.desktop .featurePageWrapper>.bannerWrapper>.contentWrapper,
 body.desktop .featurePageWrapper>.contentWrapper {
-    width: 50%;
+    width: 70vw;
     max-width: var(--contentMaxWidth);
 }
 

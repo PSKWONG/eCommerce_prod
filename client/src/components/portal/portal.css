@@ -35,3 +35,7 @@ button.close {
     border: 0px;
     cursor: pointer;
 }
+
+button.close:hover{
+    background-color:transparent; 
+}

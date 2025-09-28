@@ -1,0 +1,39 @@
+/*
+Style Sheet for Product Listing page 
+- 
+*/
+
+/*************** Shop List Wrapper ****************** */
+.shopListContentWrapper {
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.shopListContentWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: baseline;
+    align-items: normal;
+    gap: 25px;
+}
+
+/*************** Shop Item Styles ****************** */
+.shopListContentWrapper>div {
+    flex-basis: 300px;
+}
+
+/*************** Responsive Styles ****************** */
+
+body.desktop .shopListContentWrapper>div,
+body.tablet .shopListContentWrapper>div {
+
+    flex: 1 0 calc( (70vw / 3) - 50px );
+    max-width: calc(70vw / 2);
+    /* cap growth if needed */
+
+
+}

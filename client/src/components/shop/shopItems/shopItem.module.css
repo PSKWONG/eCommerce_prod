@@ -1,0 +1,87 @@
+/********** Content Wrapper ******************/
+.contentWrapper{
+    flex-basis: 300px;
+    flex-grow:1;
+    flex-shrink:1; 
+}
+
+.contentWrapper{
+    padding:15px;
+    background-color: rgb(211, 191, 101);
+    border-radius:5px;
+}
+
+.contentWrapper{
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:10px;
+}
+
+/********** detail******************/
+
+.detail{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+}
+
+.detail img {
+    flex-basis:100px;
+    flex-grow:0;
+}
+
+.detail img {
+    width:100px;
+    height:100px;
+    border-radius:100%;
+    border:5px solid white; 
+    object-fit: cover;
+}
+
+/********** Description Wrapper ******************/
+.description{
+    flex-basis:100px;
+    flex-grow:1;
+}
+
+.description{
+    padding:10px;
+}
+
+.description{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.description h1{
+    margin:0;
+    color: rgb(13, 51, 18);
+    font-size:1.2em;
+    font-weight:800;
+}
+
+.description span{
+    color: white;
+    font-weight:600;
+}
+
+
+.contentWrapper button {
+
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid rgb(10, 53, 2);
+    outline: none;
+    color: rgb(10, 53, 2);
+    background-color: white;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.contentWrapper button:hover {
+    background-color: rgb(10, 53, 2);
+    color: white;
+}
