@@ -10,6 +10,7 @@ const errorhandler = require('errorhandler'); // Error handler in development en
 const userRouter = require('./controllers/user/userRouter'); 
 const authenRouter = require('./controllers/security/autheticationRouter'); 
 const productRouter = require('./controllers/product/productRoute'); 
+const cartRouter = require('./controllers/cart/cartController'); 
 const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
 const sessionContent = require('./modules/sessions/expressSessionConfig'); //Session module with configuration 
 
@@ -52,7 +53,9 @@ app.get(/^\/(?!api\/).*/, (req, res) => {
 //Note: Client API will have a base /api/ for API routing 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/cart', cartRouter);
 app.use('/api/authen', authenRouter);
+
 
 
 /*********** Error Handling Modules **************** */
@@ -63,8 +66,6 @@ if (process.env.NODE_ENV === 'development') {
 } else {
     app.use(customErrorHandler);
 }
-
-
 
 
 /*********** Export Modules **************** */

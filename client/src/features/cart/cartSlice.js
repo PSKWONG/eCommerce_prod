@@ -43,7 +43,6 @@ import localSync from './helpers/localSync';
 //Cart Data Template
 export const cartDatatemplate = {
     cartList: {},
-    currency: 'gbp',
     version: 0
 }
 

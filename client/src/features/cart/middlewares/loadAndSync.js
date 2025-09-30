@@ -36,19 +36,25 @@ const loadAndSync = createAsyncThunk(
             * They should be have the same structure as the slice 
         */
         const localData = (local || JSON.parse(localStorage?.getItem('cart'))) ?? null;
-        const localList = localData?.cartList ?? null;
+        //const localList = localData?.cartList ?? null;
 
 
         /*************** Upload to Remote ****************** */
-        let remoteList = null;
+        let remoteData = null;
 
 
         try {
-            const response = await api.put('/cart/sync', { localList });
+            const response = await api.put(
+                '/cart/sync', 
+                { 
+                    data:localData ,
+                    template: {...cartDataTemplate}
+                }
+            );
             const { success, status, data } = response;
 
-            if(success){
-                remoteList = data?.info?.cart ?? null;
+            if (success) {
+                remoteData = data?.info?.cart ?? null;
             }
 
         } catch (err) {
@@ -62,11 +68,7 @@ const loadAndSync = createAsyncThunk(
         }
 
         /*************** Updated Data ****************** */
-
-        const updatedData = {
-            ...(localData ?? cartDataTemplate ) ,
-            cartList: ( remoteList || localList ) ?  ( remoteList || localList ) : {...cartDataTemplate.data}
-        }
+        const updatedData = remoteData ? remoteData : (localData || cartDataTemplate);
 
         /*************** Update Local Storage ****************** */
         localStorage.setItem('cart', JSON.stringify(updatedData));
