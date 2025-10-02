@@ -27,12 +27,6 @@ const cartController = {
         /*************** Local Data ****************** */
         const localData = req?.body?.data ?? null;
 
-        //Checking
-        console.log(`Server / cartController / LocalData
-                Input : ${JSON.stringify(localData, null, 2)}
-                `)
-
-
         /*************** Server Data ****************** */
         const remoteData = req?.session?.cart ?? null
 
@@ -54,6 +48,7 @@ const cartController = {
                 `)
 
             req.session.cart = localVersion > remoteVersion ? localData : remoteData;
+
 
             next();
 
@@ -91,9 +86,20 @@ const cartController = {
             return;
         }
 
+
+
+        
+
+
         /*************** Session Data ****************** */
         const sessionData = req?.session?.cart ?? null;
         const sessionCartList = sessionData?.cartList ?? null;
+
+
+        //Checking
+            console.log(`Server / cartController / Session List
+                Input : ${JSON.stringify(sessionCartList, null, 2)}
+                `)
 
         /*************** Database Data (CartList) ****************** */
         let dbCartList = null;
@@ -118,16 +124,20 @@ const cartController = {
 
         switch (true) {
 
-            case (!sessionCartList && dbCartList):
+            case (Object.keys(sessionCartList) === 0 && dbCartList.length > 0 ):
+                console.log('Cart Controller / Data handling / Only Database')
                 updatedCartList = cartHelper.dataConvertor.dbToStore(dbCartList);
                 break;
 
-            case (sessionCartList && dbCartList):
-                updatedCartList = cartHelper.dataMerge(sessionCartList, dbCartList, userId);
-                updatedSteps += 1 ; 
+            case (Object.keys(sessionCartList) !== 0 ):
+                console.log('Cart Controller / Data handling / Merge Data')
+                cartHelper.dataMerge(sessionCartList, dbCartList, userId);
+                updatedCartList = sessionCartList; 
+                updatedSteps += 1;
                 break;
 
             default:
+                console.log('Cart Controller / Data handling / Default')
                 updatedCartList = null;
                 break;
         }
@@ -139,7 +149,7 @@ const cartController = {
                 ...previousData,
                 cartList: updatedCartList ? updatedCartList : previousData.cartList,
                 version: previousData.version + updatedSteps
-            } : null ; 
+            } : null;
 
         req.session.cart = updatedData;
 

@@ -83,6 +83,13 @@ Style Sheet for prodcut details
     padding: 10px 0px;
 }
 
+.basicInfoWrapper {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:start;
+}
+
 .basicInfoWrapper h1 {
     margin: 5px 0px;
 
@@ -95,7 +102,8 @@ Style Sheet for prodcut details
 
 }
 
-/***** Price Listing Wrapper *****/
+/***** Item Controller Wrapper *****/
+
 
 
 /***** Detail Wrapper *****/

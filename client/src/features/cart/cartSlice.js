@@ -98,10 +98,8 @@ const cartSlice = createSlice({
                 state.status.isError = false;
                 console.log('CartSlice / Load and Sync / Returned Data', action.payload); 
                 state.data.version = action?.payload?.version ?? 0 ; 
-                state.data.cartList = {
-                    ...state.data.cartList,
-                    ...action?.payload?.cartList ?? {}
-                }
+                state.data.cartList = action?.payload?.cartList
+                
                 
             })
             .addCase(loadAndSync.rejected, (state, action) => {

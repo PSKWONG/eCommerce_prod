@@ -27,7 +27,7 @@ const ItemControlComponent = React.memo((props) => {
             <button className={styles.submitWrapper} onClick={buttonController.action.handleSubmit}>
                 <IconSet data={buttonController.data.submitWording} />
             </button>
-            <button className={styles.submitWrapper}>
+            <button className={styles.submitWrapper} onClick={buttonController.action.handleDelete}>
                 <IconSet data={buttonController.data.deleteWording} />
             </button>
 

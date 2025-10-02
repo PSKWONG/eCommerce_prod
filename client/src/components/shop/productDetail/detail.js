@@ -5,13 +5,13 @@ import { useContext } from 'react';
 
 /***************Import Internal Modules****************** */
 import './detail.css';
-import ItemControlComponent from '../../../features/cart/itemController/itemControllerContainer'; 
+import ItemControlComponent from '../../../features/cart/itemController/itemControllerContainer';
 import { ShopDataSharing } from '../../../containers/shop/shopListing/shopListingContainer';
 
 const ProductDetail = () => {
 
     //Extract Data from pros
-    const {selectedItem, itemController} = useContext(ShopDataSharing)?.shopListController?.data ?? {} ; 
+    const { selectedItem, itemController } = useContext(ShopDataSharing)?.shopListController?.data ?? {};
     const { product_name, description, image_path, unit_price } = selectedItem;
 
     return (
@@ -22,10 +22,9 @@ const ProductDetail = () => {
                     <div>
                         <div className={`basicInfoWrapper`}>
                             <h1>{product_name ?? ''}</h1>
-                            <div>
-                                <span>{`£ ${unit_price ?? 'Unavaliable'}`}</span>
+                            <span>{`£ ${unit_price ?? 'Unavaliable'}`}</span>
                                 <ItemControlComponent data={itemController} />
-                            </div>
+
                         </div>
                         <p>
                             {description ?? ''}

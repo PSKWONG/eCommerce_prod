@@ -147,7 +147,7 @@ const ItemControlContainer = (props) => {
         event.preventDefault();
         setQuantity(0);
 
-        if (cartItem && isUpdate) {
+        if (cartItem) {
             setUpdateAction(true);
         }
 
@@ -156,7 +156,7 @@ const ItemControlContainer = (props) => {
     /******************* Submit Button Controller ********************* */
     const buttonController = {
         data: {
-            submitWording: selectedItem ? "Update" : "Add",
+            submitWording: cartItem ? "Update" : "Add",
             deleteWording: "Delete"
         },
         action: {

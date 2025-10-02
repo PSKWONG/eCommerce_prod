@@ -38,7 +38,7 @@ Updated Date : 30/09/2026
 
 /***************Import Internal Modules****************** */
 const dataValidator = require('../../modules/validator/dataValidator');
-const cartDB = require('../../models/cartDB'); 
+const cartDB = require('../../models/cartDB');
 
 
 const cartHelper = {
@@ -88,73 +88,57 @@ const cartHelper = {
     },
     dataMerge: async (session, database, userId) => {
 
-
+        console.log(
+            `Start of data merge:
+            # Session: ${session}
+            # Database: ${database}
+            # user ID : ${userId}
+            `)
 
         //Data Checking - Make sure the data is avaliable
         const { isEmptyObject } = dataValidator.checking;
-        if (isEmptyObject(session), isEmptyArray(database), !userId) {
+        if (isEmptyObject(session), !userId) {
             return null;
         }
 
         //Session Data 
-        const sessionCartList = session; 
-        const sessionListItems = Object.keys(sessionCartList); 
+        const sessionCartList = session;
+        const sessionListItems = Object.keys(sessionCartList);
 
         //Database Data
-        const databaseCartList = cartHelper.dataConvertor.dbToStore(database); 
-        const databaseListItems = Object.keys(databaseCartList); 
+        const databaseCartList = database ? cartHelper.dataConvertor.dbToStore(database) : null;
+        const databaseListItems = databaseCartList ? Object.keys(databaseCartList) : [];
 
         //Items to be modified  
-        const itemsToBeDeleted = databaseListItems.filter(item => !sessionListItems.has(item)); 
-        const itemsToBeAdded = sessionListItems.filter(item => !databaseListItems.has(item)); 
-        const itemsToBeUpdated = databaseListItems.filter(item => sessionListItems.has(item)); 
+        const itemsToBeDeleted = databaseListItems.filter(item => !sessionListItems.includes(item));
+        const itemsToBeAdded = sessionListItems.filter(item => !databaseListItems.includes(item));
+        const itemsToBeUpdated = databaseListItems.filter(item => sessionListItems.includes(item));
 
         //Items to be deleted
-        if(itemsToBeDeleted){
-            for (const item in itemsToBeDeleted){
-                const productId = Number(item); 
-                await cartDB.delete(userId, productId); 
-            }
-        }; 
-
-        //Items to be added
-        if(itemsToBeAdded){
-            for (const item in itemsToBeAdded){
-                const productId = Number(item); 
-                const quantity = sessionListItems.cartList[item].quantity; 
-                await cartDB.create(userId, productId, quantity); 
+        if (itemsToBeDeleted.length > 0 ) {
+            for (const item of itemsToBeDeleted) {
+                const productId = Number(item);
+                await cartDB.delete(userId, productId);
             }
         };
 
         //Items to be added
-        let updatedCartList = {...sessionCartList}; 
-
-
-        if(itemsToBeUpdated){
-            for (const item in itemsToBeUpdated){
-                const productId = Number(item); 
-                const sessionQuantity = sessionListItems.cartList[item].quantity; 
-                const dbQuantity = databaseListItems.cartList[item].quantity; 
-
-
-                switch (true) {
-
-                    case(sessionQuantity > dbQuantity) :
-                        await cartDB.update(userId, productId, sessionQuantity); 
-                    
-                    case(sessionQuantity < dbQuantity) :
-                        updatedCartList[item].quantity = dbQuantity; 
-
-                    default:
-                        continue;
-
-                }
+        if (itemsToBeAdded.length > 0) {
+            for (const item of itemsToBeAdded) {
+                const productId = Number(item);
+                const quantity = sessionCartList[item].quantity;
+                await cartDB.create(userId, productId, quantity);
             }
         };
 
+        if (itemsToBeUpdated.length > 0) {
+            for (const item of itemsToBeUpdated) {
+                const productId = Number(item);
+                const sessionQuantity = sessionCartList[item].quantity;
+                await cartDB.update(userId, productId, sessionQuantity);
 
-        //Export Updated Cart List 
-        return updatedCartList; 
+            }
+        };
 
     }
 
