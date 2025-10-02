@@ -10,11 +10,14 @@ Shop Listing Container to
 
 /***************Import external Modules****************** */
 import { useState, useEffect, createContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 /***************Import Internal Modules****************** */
 import api from '../../../api/apiConnector';
 import ShopListComponent from '../../../components/shop/shopList/shopListComponent';
 import usePortalController from '../../portal/hook/portController';
+import cartLoadAndSync from '../../../features/cart/middlewares/loadAndSync';
+import { selectCartData, isCartLoading } from '../../../features/cart/cartSlice';
 import DetailPage from '../../../components/shop/productDetail/detail';
 
 /*************** Create Context for Sharing ****************** */
@@ -27,6 +30,10 @@ const ShopListingContainer = () => {
     const [shopList, setShopList] = useState(null);
     const [currency, setCurrency] = useState('gbp');
     const [selectedItem, setSelectedItem] = useState();
+
+    //Hook Actions 
+    const dispatch = useDispatch();
+
 
     //Phase 2 - Set action for changing Category ID 
 
@@ -99,12 +106,32 @@ const ShopListingContainer = () => {
 
     }, [categoryId])
 
+    /***** Dispatch a action for loaing cart  *****/
+    //Get the cart information at the initiation of the page 
+    useEffect(()=>{
+        dispatch(cartLoadAndSync());
+    },[dispatch])
+    
+
     /***** Portal Controller *****/
     const portalController = usePortalController(DetailPage);
     const { PortalComponent } = portalController.data;
     const { showPortal } = portalController.actions;
 
+    //Checking
     console.log('Loading the Container')
+
+
+    /***** Item Controller *****/
+    
+    const cartList = useSelector(selectCartData)?.cartList ?? null;
+    const cartLoadingStatus = useSelector(isCartLoading)?? false;
+    const itemController = {
+        cartList,
+        selectedItem: selectedItem?? null,
+        isLoading: cartLoadingStatus
+    }
+
 
 
     /***** Data Export *****/
@@ -112,6 +139,7 @@ const ShopListingContainer = () => {
         data: {
             productList: shopList,
             selectedItem,
+            itemController,
             currency
         },
         actions: {

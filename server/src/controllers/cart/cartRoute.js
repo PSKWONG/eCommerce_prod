@@ -8,4 +8,4 @@ const cartController = require('./cartController');
 cartRouter.put('/sync', cartController.sessionSync ,  cartController.cartDBSync, cartController.exportSyncResult  ); 
 
 /*********** Export Modules **************** */
-module.exports = cartController; 
+module.exports = cartRouter; 

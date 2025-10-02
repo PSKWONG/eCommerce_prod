@@ -35,20 +35,20 @@ Phase 3- Currency chnages
 import { createSlice } from '@reduxjs/toolkit';
 
 /***************Import Internal Modules****************** */
-import localSync from './helpers/localSync';
+import loadAndSync from './middlewares/loadAndSync'; 
 
 
 
 /*************** Create Cart Slice ****************** */
 //Cart Data Template
-export const cartDatatemplate = {
+export const cartDataTemplate  = {
     cartList: {},
     version: 0
 }
 
 // Cart States
 const cartState = {
-    data: { ...cartDatatemplate} ,
+    data: { ...cartDataTemplate } ,
     status: {
         isLoading: false,
         isError: false,
@@ -69,6 +69,7 @@ const cartSlice = createSlice({
             //#### Case Handling - Item is not avaliable #########
             if (itemId) {
                 state.data.cartList[itemId] = action?.payload;
+                state.data.version += 1; 
             } else {
                 return;
             }
@@ -80,6 +81,7 @@ const cartSlice = createSlice({
             //#### Case Handling - Item is not avaliable #########
             if (itemId) {
                 delete state.data.cartList[itemId];
+                state.data.version += 1; 
             } else {
                 return;
             }
@@ -88,19 +90,29 @@ const cartSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(localSync.pending, (state) => {
-                state.isLoading = true;
+            .addCase(loadAndSync.pending, (state) => {
+                state.status.isLoading = true;
             })
-            .addCase(localSync.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.isError = false;
-                state.cart = action.payload;
+            .addCase(loadAndSync.fulfilled, (state, action) => {
+                state.status.isLoading = false;
+                state.status.isError = false;
+                console.log('CartSlice / Load and Sync / Returned Data', action.payload); 
+                state.data.version = action?.payload?.version ?? 0 ; 
+                state.data.cartList = {
+                    ...state.data.cartList,
+                    ...action?.payload?.cartList ?? {}
+                }
+                
             })
-            .addCase(localSync.rejected, (state, action) => {
-                state.isLoading = false;
-                state.isError = true;
-                state.errorMsg = action.error.message;
+            .addCase(loadAndSync.rejected, (state, action) => {
+                state.status.isLoading = false;
+                state.status.isError = true;
+                state.status.errorMsg = action.error.message;
             })
+    },
+    selectors:{
+        selectCartData: (state) => state.data,
+        isCartLoading: (state) => state.status.isLoading
     }
 })
 
@@ -117,6 +129,6 @@ export const {
 
 //Export Store State
 export const {
-    selectCart,
+    selectCartData,
     isCartLoading
 } = cartSlice.selectors;

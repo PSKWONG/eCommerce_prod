@@ -10,7 +10,7 @@ const errorhandler = require('errorhandler'); // Error handler in development en
 const userRouter = require('./controllers/user/userRouter'); 
 const authenRouter = require('./controllers/security/autheticationRouter'); 
 const productRouter = require('./controllers/product/productRoute'); 
-const cartRouter = require('./controllers/cart/cartController'); 
+const cartRouter = require('./controllers/cart/cartRoute');
 const customErrorHandler = require('./controllers/responseHandler/customErrorHandler');  // Configuration on Custom Error Handler
 const sessionContent = require('./modules/sessions/expressSessionConfig'); //Session module with configuration 
 

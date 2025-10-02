@@ -14,6 +14,9 @@ import { ReactComponent as Order } from './images/packageIcon.svg';
 import { ReactComponent as Complete } from './images/completeIcon.svg';
 import { ReactComponent as BurgerMenu } from './images/burgerMenuIcon.svg';
 import { ReactComponent as Loading } from './images/loading.svg';
+import { ReactComponent as Update } from './images/updateIcon.svg';
+import { ReactComponent as Upload } from './images/uploadIcon.svg';
+import { ReactComponent as Delete } from './images/deleteIcon.svg';
 
 
 
@@ -34,7 +37,10 @@ const iconRegistration = {
     order:Order,
     complete:Complete,
     burgerMenu: BurgerMenu,
-    loading: Loading
+    loading: Loading,
+    Update:Update,
+    Add:Upload,
+    Delete:Delete
 }
 
 export default iconRegistration; 

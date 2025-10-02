@@ -20,11 +20,11 @@ import api from '../../../api/apiConnector';
 
 const loadAndSync = createAsyncThunk(
 
-    'cart/localSync',
+    'cart/loadAndSync',
     async (local, thunkAPI) => {
 
         //Actions to use 
-        const state = thunkAPI.getState();
+        //const state = thunkAPI.getState();
 
         /*************** Get Local Data****************** */
         /*
@@ -35,6 +35,9 @@ const loadAndSync = createAsyncThunk(
             * Template is imported from cartSlice.js
             * They should be have the same structure as the slice 
         */
+
+        console.log(`Client / Load and Sync | Local Data. ${JSON.stringify(local, null, 2)}`)
+
         const localData = (local || JSON.parse(localStorage?.getItem('cart'))) ?? null;
         //const localList = localData?.cartList ?? null;
 
@@ -45,13 +48,13 @@ const loadAndSync = createAsyncThunk(
 
         try {
             const response = await api.put(
-                '/cart/sync', 
-                { 
-                    data:localData ,
-                    template: {...cartDataTemplate}
+                '/cart/sync',
+                {
+                    data: localData,
+                    template: { ...cartDataTemplate }
                 }
             );
-            const { success, status, data } = response;
+            const { success, data } = response;
 
             if (success) {
                 remoteData = data?.info?.cart ?? null;

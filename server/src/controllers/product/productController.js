@@ -67,14 +67,6 @@ const productController = {
             //Start get product List 
             const result = await productDB.findByCategory(catID);
 
-            //Checking
-            console.log(
-                `
-                Input : ${catID}
-                Result : ${result}
-                `
-            )
-
             // Construct Response Object
             response.setInfo('products', result);
             res.status(200).json(response.build());

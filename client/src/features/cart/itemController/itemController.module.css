@@ -1,0 +1,75 @@
+/*****  Item Control Wrapper *****/
+.itemControlWrapper{
+    width:100%;
+    min-width:200px;
+    min-height:30px;
+    flex-basis:200px;
+    flex-grow:1;
+
+}
+
+.itemControlWrapper{
+    display:flex;
+    flex-direction:row; 
+    flex-wrap:nowrap; 
+    justify-content:space-around; 
+    gap: 10px;
+}
+
+
+/***** Submit Button  Wrapper *****/
+
+
+.submitWrapper{
+    width:30px;
+    height:30px;
+    border-radius: 100%; 
+    background-color: rgb(10, 53, 2);
+    border:0px;
+    outline:none; 
+    padding:5px;
+    cursor:pointer; 
+    
+
+}
+
+.submitWrapper{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    
+}
+
+.submitWrapper :global(.iconItem) {
+    fill: rgb(255, 255, 255);
+    stroke: rgb(255, 255, 255);
+    stroke-width:5;
+}
+
+
+/***** Grey Out Style  *****/
+.itemControlWrapper strong,
+.itemControlWrapper button{
+    transition:opacity 0.3s ease;
+    
+}
+
+.itemControlWrapper :global(.iconItem) {
+    transition:opacity 0.3s ease;
+}
+
+
+.greyOut strong,
+.greyOut button{
+    opacity: 0.5;
+    cursor:default !important;
+    
+}
+
+.greyOut :global(.iconItem) {
+    opacity: 0.5;
+    stroke-width:5;
+}
+
+
+

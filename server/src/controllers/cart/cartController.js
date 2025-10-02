@@ -27,6 +27,11 @@ const cartController = {
         /*************** Local Data ****************** */
         const localData = req?.body?.data ?? null;
 
+        //Checking
+        console.log(`Server / cartController / LocalData
+                Input : ${JSON.stringify(localData, null, 2)}
+                `)
+
 
         /*************** Server Data ****************** */
         const remoteData = req?.session?.cart ?? null
@@ -42,7 +47,7 @@ const cartController = {
             const localVersion = localData?.version ?? 0;
             const remoteVersion = remoteData?.version ?? 0;
 
-            //Internal Log
+            //Internal Log - Checking 
             console.log(
                 `
                 The cart data of ${localVersion > remoteVersion ? 'Local' : ' Remote'} is choosen.
@@ -153,7 +158,7 @@ const cartController = {
         */
 
         const response = responseConstructor();
-        response.setInfo(req?.session?.cart ?? null);
+        response.setInfo('cart', req?.session?.cart ?? null);
 
         res.status(200).json(response.build());
 
