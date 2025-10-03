@@ -77,7 +77,7 @@ const cartController = {
         /*************** Registered User ****************** */
         //Checking Login in Status 
         const isAuthenticated = req?.user ? true : false;
-        const userId = req.user.id;
+        const userId = req?.user?.id?? null;
 
 
         //### Edge Case - Not a registered user
