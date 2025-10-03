@@ -1,7 +1,10 @@
 /********* Import Internal Modules *********** */
-const {pool} = require('../modules/database/localDB'); // Connect with the Database connection module
+const localPool = require('../modules/database/localDB').pool; 
+const neonPool = require('../modules/database/neonDB').pool; 
 
-
+//Conditional Pool Selection
+const environment = process.env.NODE_ENV || 'development';
+const pool = environment === 'development' ? localPool : neonPool ; 
 
 //Create a function "query" for executing SQL queries
 const dbQuery = async (sqlQuery, params = []) => {

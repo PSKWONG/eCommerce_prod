@@ -23,7 +23,7 @@ const ProductDetail = () => {
                         <div className={`basicInfoWrapper`}>
                             <h1>{product_name ?? ''}</h1>
                             <span>{`£ ${unit_price ?? 'Unavaliable'}`}</span>
-                                <ItemControlComponent data={itemController} />
+                            <ItemControlComponent data={itemController} />
 
                         </div>
                         <p>
