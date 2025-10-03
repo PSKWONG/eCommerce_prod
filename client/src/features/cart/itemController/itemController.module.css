@@ -3,16 +3,12 @@
     width:100%;
     min-width:200px;
     min-height:30px;
-    flex-basis:200px;
-    flex-grow:1;
-
 }
 
 .itemControlWrapper{
     display:flex;
     flex-direction:row; 
     flex-wrap:nowrap; 
-    justify-content:space-around; 
     gap: 10px;
 }
 
