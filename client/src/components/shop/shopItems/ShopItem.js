@@ -28,7 +28,7 @@ const ShopItem = (props) => {
     return (
         <div className={`${styles.contentWrapper}`}>
             <div className={`${styles.detail}`}>
-                <img src={`/assets/images/productimage/${image_path}`} alt={product_name ?? ''} />
+                <img src={`/assets/images/products/${image_path}`} alt={product_name ?? ''} />
                 <div className={styles.description}>
                     <h1>{product_name ?? ''}</h1>
                     <span>{`£${unit_price ?? 'Unavaliable'}`}</span>

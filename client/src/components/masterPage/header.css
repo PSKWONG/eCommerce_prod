@@ -54,6 +54,10 @@ Header Section of Master Page Style Sheet
     cursor:pointer; 
 }
 
+.burgerMenuIcon:hover {
+    background:transparent; 
+}
+
 
 /*
 ******************* Menu Component Styles ******************* 
