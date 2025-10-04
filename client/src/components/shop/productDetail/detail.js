@@ -18,7 +18,7 @@ const ProductDetail = () => {
         <div className={`productDetailWrapper`}>
             <div className={`contentWrapper`}>
                 <div className={`productWrapper`}>
-                    <img src={`/assets/images/productimage/${image_path}`} alt={product_name} />
+                    <img src={`/assets/images/products/${image_path}`} alt={product_name} />
                     <div>
                         <div className={`basicInfoWrapper`}>
                             <h1>{product_name ?? ''}</h1>

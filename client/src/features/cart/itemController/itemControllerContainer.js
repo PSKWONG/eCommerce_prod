@@ -38,15 +38,6 @@ const ItemControlContainer = (props) => {
     /******************* Data Extraction ********************* */
     const { selectedItem, cartList, isLoading } = props.data;
 
-
-    //const isLoading = false; 
-
-    //Checking
-    console.log(`ItemController Imported Data
-            selectedItem : ${JSON.stringify(selectedItem, null, 2)}
-            cartList: ${JSON.stringify(cartList, null, 2)}
-            `)
-
     /******************* Check for Data Input  ********************* */
     useEffect(() => {
 

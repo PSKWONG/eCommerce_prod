@@ -36,8 +36,6 @@ const loadAndSync = createAsyncThunk(
             * They should be have the same structure as the slice 
         */
 
-        console.log(`Client / Load and Sync | Local Data. ${JSON.stringify(local, null, 2)}`)
-
         const localData = (local || JSON.parse(localStorage?.getItem('cart'))) ?? null;
         //const localList = localData?.cartList ?? null;
 

@@ -118,9 +118,6 @@ const ShopListingContainer = () => {
     const { PortalComponent } = portalController.data;
     const { showPortal } = portalController.actions;
 
-    //Checking
-    console.log('Loading the Container')
-
 
     /***** Item Controller *****/
     
