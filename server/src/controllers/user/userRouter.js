@@ -8,6 +8,8 @@ const authentication = require('../security/passport/passportAuthentication');
 
 
 userRouter.post('/local/create', localUserController.create, authentication.autoLogin); 
+userRouter.get('/profile', )
+
 
 
 /*********** Export Modules **************** */

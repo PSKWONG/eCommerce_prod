@@ -42,6 +42,9 @@ const authenticationSlice = createSlice({
             const isEmptyErrorMessage = (action.payload ?? []).length === 0;
             state.data.message = isEmptyErrorMessage ? [] : action.payload;
             state.status.isError = isEmptyErrorMessage ? false : true;
+        },
+        setUserInfo: (state, action) => {
+            state.data.userInfo = action.payload; 
         }
     },
     extraReducers: (builder) => {
@@ -53,7 +56,7 @@ const authenticationSlice = createSlice({
                 state.status.isLoading = false;
                 state.status.isError = false;
                 state.status.isAuthen = action.payload.success;
-                state.data.message = action.payload.message; 
+                state.data.message = action.payload.message;
             })
             .addCase(authenticationStatusChecking.rejected, (state, action) => {
                 state.status.isLoading = false;
@@ -63,10 +66,11 @@ const authenticationSlice = createSlice({
             })
     },
     selectors: {
-        selectAuthenState: (state) => state.status.isAuthen, 
+        selectAuthenState: (state) => state.status.isAuthen,
         selectErrorMsg: (state) => state.data.message,
-        selectErrorState: (state) => state.status.isError, 
-        selectLoadingStatus : (state) => state.status.isLoading
+        selectErrorState: (state) => state.status.isError,
+        selectLoadingStatus: (state) => state.status.isLoading, 
+        selectUserInfo: (state) => state.data.userInfo
     }
 })
 
@@ -75,7 +79,8 @@ export default authenticationSlice.reducer;
 
 //Export Actions 
 export const {
-    setErrorMsg
+    setErrorMsg,
+    setUserInfo
 } = authenticationSlice.actions;
 
 //Export Store State
@@ -83,5 +88,6 @@ export const {
     selectErrorMsg,
     selectErrorState,
     selectAuthenState,
-    selectLoadingStatus
+    selectLoadingStatus,
+    selectUserInfo
 } = authenticationSlice.selectors;

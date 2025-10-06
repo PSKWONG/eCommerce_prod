@@ -1,0 +1,29 @@
+
+
+/* ****************** Content Wrapper ***************/
+.contentWrapper{
+    padding: 0px  var(--boxpadding); 
+}
+
+
+
+/* ****************** Password Wrapper ***************/
+.passwordWrapper{
+    display:flex; 
+    flex-direction:column; 
+    flex-wrap:nowrap; 
+}
+
+.passwordWrapper>div{
+    flex-basis:100%;
+    flex-grow:0; 
+    flex-shrink:0;
+}
+
+.passwordWrapper>div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}

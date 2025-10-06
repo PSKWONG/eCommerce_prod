@@ -1,0 +1,152 @@
+
+
+/***************Import External Modules****************** */
+import { redirect } from 'react-router-dom';
+
+
+/***************Import Internal Modules****************** */
+import ProfileContainer from './ProfileContainer';
+import api from '../../../api/apiConnector';
+import returnConstruct from '../../app/utilities/returnObjConstructor';
+
+
+
+const profileRoute = {
+    index: true,
+    element: <ProfileContainer />,
+    loader: async () => {
+
+        //Construct of feedback 
+        let feedback = {
+            data: null,
+            error: []
+        }
+
+        try {
+
+            //Get Data from API Server ( User )
+            const response = await api.get('/users/profile');
+
+            //Get the user data 
+            const { success, data } = response;
+
+            //Conditional feedback from Loader 
+            if (success) {
+                feedback.data = data.info[`users`];
+            }else{
+                feedback.error.push('Fail on retrieving user profile. Please try again.')
+            }
+
+            return feedback;
+
+
+        } catch (err) {
+
+            //Internal Log
+            console.log(`
+                Error in retrieving user profile 
+                #Error : ${err}
+                `);
+
+            //Feedback return 
+            feedback.error.push('Fail on retrieving user profile. Please try again.')
+            return feedback;
+
+        }
+
+
+    },
+    action: async ({ request }) => {
+
+        //Data Return
+        let feedback = {
+            path: null,
+            error: []
+        };
+
+        //Get Data from Form in component 
+        const formData = await request.formData();
+
+        //Input Data 
+        const username = formData.get('username');
+        const email = formData.get('email');
+        const password = formData.get('password');
+        const passwordCheck = formData.get('passwordCheck');
+
+        //Request object Construction 
+        let requestObj = {};
+
+        //Helper function on checking
+        const isEmpty = (input) => {
+            if (input.trim() === "") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // Information Checking and variable assignment 
+        if (!isEmpty(username)) {
+            requestObj.userName = username;
+        }
+
+        if (!isEmpty(email)) {
+            requestObj.email = email;
+        }
+
+        if (!isEmpty(password) || !isEmpty(passwordCheck)) {
+            if (password === passwordCheck) {
+                requestObj.password = password;
+            } else {
+                feedback.error.push('Passwords must match');
+            }
+        }
+
+        //Input Checking 
+        if (feedback.error.length > 0) {
+            return feedback;
+        }
+
+        //API Call to server 
+        try {
+
+            //If the request is sucessfull, extract the response from the AXIOS object
+            const response = await api.put('/users/local/update', { requestObj });
+
+            //Extract Information 
+            const { success, data } = response;
+
+            //Conditional Response 
+            if (success && data?.path) {
+
+                feedback.path = data?.path; 
+
+            } else {
+
+                (data?.message ?? []).forEach((message) => {
+                    feedback.error.push(message);
+                })
+            }; 
+
+            return feedback; 
+
+        } catch (err) {
+
+            //Internal Log 
+            console.log(`
+                Error in submitting user profile update
+                #Error : ${err}
+                `); 
+            
+            feedback.error.push('Fail on updating user profile. Please try again.')
+            
+            return feedback;
+
+        }
+
+    }
+
+
+}
+
+export default profileRoute; 
