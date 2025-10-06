@@ -1,0 +1,17 @@
+[
+    {
+        "ref": "profile", 
+        "label": "Profile",
+        "path": "/"
+    },
+    {
+        "ref": "order", 
+        "label": "Order",
+        "path": "/"
+    },
+    {
+        "ref": "logOut", 
+        "label": "Logout",
+        "path": "/"
+    }
+]

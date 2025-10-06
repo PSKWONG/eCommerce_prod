@@ -6,6 +6,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import MasterPage from '../masterPage/MasterPageContainer';
 import authenticationRoute from '../../features/authentication/authenticationRoute';
 import productRoute from '../shop/shopRoute'; 
+import userRoute from '../users/usersPortalRoute'; 
 
 /*
 This is the outter most layer of App on routing 
@@ -18,7 +19,8 @@ const appRouter = createBrowserRouter([
     children: [
       //Add the children route here:
       authenticationRoute, 
-      productRoute
+      productRoute,
+      userRoute
     ]
 
   },

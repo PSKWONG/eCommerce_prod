@@ -2,6 +2,7 @@
 .shadowingBox {
     --boxpadding: 25px;
     --shadowBoxBackground: white;
+    --boxRadius:8px;
 }
 
 
@@ -9,7 +10,7 @@
     padding: var(--boxpadding);
     box-sizing: border-box;
     background-color: var(--shadowBoxBackground);
-    border-radius: 8px;
+    border-radius: var(--boxRadius);
     box-shadow: 0px 0px 10px grey;
 }
 

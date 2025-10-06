@@ -17,9 +17,16 @@ const IconComponent = (props) => {
 
     //Extract Icon 
     const ref = props?.data ?? 'home';
-    const ItemIcon = iconRegistration[ref];
+    const ItemIcon = iconRegistration[ref] ?? null;
 
-    return <ItemIcon className={'iconItem'} />
+    return (
+        <>
+        {
+            ItemIcon && <ItemIcon className={'iconItem'} /> 
+        }
+        </>
+
+    )
 
 }
 
