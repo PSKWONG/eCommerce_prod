@@ -94,6 +94,8 @@ const localUser = {
         const schema = requestValidation.users.update;
         const validationErrors = await requestValidation.getValidationErrors(schema, inputs);
 
+        console.log(`Information recieved from Local User / UPdate , ${JSON.stringify(inputs, null, 2)}`)
+
 
         //## Edge Case - Validation is not passed; 
         if (validationErrors?.length > 0) {
@@ -111,21 +113,21 @@ const localUser = {
             return res.status(400).json(response.build());
         }
 
-        // Update user information through execute queries in mdoles 
         //Prepare information for updating user info
 
-        //Get user ID
-        const id = req?.user?.id ?? null;
+        //Get Existing User Info 
+        const prevUserInfo = req?.user ?? null;
+        const id = prevUserInfo.id ?? null;
         if (!id) {
             response.setMessage(`Fail to get the user authentication.`);
             res.status(400).json(response.build());
         }
 
         //Get username
-        const username = req.body?.user?.userName ?? req.user.user_name;
-        const email = req.body?.user?.email ?? req.user.email;
-        const password = req.body?.user?.password ? await securityHelper.passwordencryption(req.body.user.password) : req.user.password;
-        const islocal = req.user.isLocal ?? true;
+        const username = inputs?.userName ?? prevUserInfo.user_name;
+        const email = inputs?.email ?? prevUserInfo.email;
+        const password = inputs?.password ? await securityHelper.passwordencryption(inputs.password) : prevUserInfo.password;
+        const islocal = inputs?.isLocal ?? true;
 
 
         try {
@@ -149,9 +151,11 @@ const localUser = {
                 return;
             }
 
-            //Response Construction 
-            response.setPath('/user');
-            return res.status(200).json(response.build());
+            //Continue for next Middleware
+            next(); 
+            
+            return ; 
+            
 
         } catch (err) {
             //Local log 
@@ -165,7 +169,7 @@ const localUser = {
                     #Error: ${err}
                     `);
             next(err);
-            return 
+            return
         }
     },
     getUser: async (req, res, next) => {

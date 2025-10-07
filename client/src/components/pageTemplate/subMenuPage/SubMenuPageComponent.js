@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 /***************Import Internal Modules****************** */
 import FunctionalPageComponent from '../functionalPage/FunctionalPageComponent';
-import './subMenu.css';
+import './submenu.css';
 import basic from '../../pageTemplate/styles/page.module.css'; 
 
 

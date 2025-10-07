@@ -2,7 +2,7 @@
     {
         "ref": "profile", 
         "label": "Profile",
-        "path": "/"
+        "path": "/user"
     },
     {
         "ref": "order", 
@@ -12,6 +12,6 @@
     {
         "ref": "logOut", 
         "label": "Logout",
-        "path": "/"
+        "path": "/authen/logout"
     }
 ]

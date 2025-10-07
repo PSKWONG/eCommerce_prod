@@ -83,10 +83,25 @@ const authenticationController = {
     logOut: (req, res) => {
 
         req.logOut(() => {
-            const response = responseConstructor();
-            response.setPath('/');
-            res.status(200).json(response.build());
-            return;
+
+            try {
+
+                const response = responseConstructor();
+                response.setPath('/');
+                return res.status(200).json(response.build());
+
+            } catch (err) {
+
+                //Internal Log 
+                console.log(`
+                        Error in Logging Out 
+                        # Error : ${err}
+                    `);
+                response.setPath('/');
+                return res.status(400).json(response.build());
+
+            }
+
         })
     },
 
@@ -115,7 +130,7 @@ const authenticationController = {
         const response = responseConstructor();
         response.setPath(process.env.AUTH_FAILURE_URL);
         response.setMessage('Page requested is restricted to authenticated user. Please singup / login.')
-        res.status(400).json(response.build());
+        res.status(401).json(response.build());
         return;
     },
 

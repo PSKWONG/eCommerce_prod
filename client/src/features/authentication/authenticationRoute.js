@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import FunctionalPageTemplate from '../../components/pageTemplate/functionalPage/FunctionalPageComponent'; 
 import signUpRoute from './signUp/signUpRoute'; 
 import loginRoute from './login/loginRoute'; 
+import logoutRoute from './logout/logoutRoute'; 
 
 
 const authenRoute = {
@@ -12,7 +13,8 @@ const authenRoute = {
     element: <FunctionalPageTemplate> <Outlet /> </FunctionalPageTemplate>,
     children: [
         signUpRoute,
-        loginRoute
+        loginRoute,
+        logoutRoute
     ]
 }
 

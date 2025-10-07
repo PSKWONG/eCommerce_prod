@@ -8,7 +8,7 @@ const authentication = require('../security/passport/passportAuthentication');
 
 
 userRouter.post('/local/create', localUserController.create, authentication.autoLogin);
-userRouter.put('/local/update', authentication.checking, localUserController.update);
+userRouter.put('/local/update', authentication.checking, localUserController.update, localUserController.getUser);
 userRouter.get('/profile', authentication.checking,localUserController.getUser); 
 
 

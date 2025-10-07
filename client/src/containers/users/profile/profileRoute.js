@@ -27,17 +27,25 @@ const profileRoute = {
             const response = await api.get('/users/profile');
 
             //Get the user data 
-            const { success, data } = response;
+            const { success, status, data } = response;
 
-            //Conditional feedback from Loader 
-            if (success) {
-                feedback.data = data.info[`users`];
-            } else {
-                feedback.error.push('Fail on retrieving user profile. Please try again.')
+            //Conditional Feedback from Loader
+            switch (true) {
+
+                case (success === true):
+                    feedback.data = data.info[`users`];
+                    return feedback;
+
+                case (success === false && status !== 401):
+                    feedback.error.push('Fail on retrieving user profile. Please try again.')
+                    return feedback;
+
+                case (success === false && status === 401):
+                    return redirect(data.path ?? '/');
+
+                default:
+                    return redirect(data.path ?? '/');
             }
-
-            return feedback;
-
 
         } catch (err) {
 
@@ -47,9 +55,7 @@ const profileRoute = {
                 #Error : ${err}
                 `);
 
-            //Feedback return 
-            feedback.error.push('Fail on retrieving user profile. Please try again.')
-            return feedback;
+            return redirect('/');
 
         }
 
@@ -59,7 +65,7 @@ const profileRoute = {
 
         //Data Return
         let feedback = {
-            success: false,
+            success: null,
             path: null,
             data: null,
             error: []
@@ -105,6 +111,7 @@ const profileRoute = {
 
         //Input Checking 
         if (feedback.error.length > 0) {
+            feedback.success = false;
             return feedback;
         }
 
@@ -112,33 +119,34 @@ const profileRoute = {
         try {
 
             //If the request is sucessfull, extract the response from the AXIOS object
-            const response = await api.put('/users/local/update', { requestObj });
+            const response = await api.put('/users/local/update', requestObj);
 
             //Extract Information 
-            const { success, data } = response;
+            const { success, status, data } = response;
 
             //Conditional Response 
-            if (success) {
+            switch (true) {
 
-                feedback.success = true;
-
-                //Get Data from API Server ( User )
-                const getResponse = await api.get('/users/profile');
-
-                //Extract Information 
-                const { success, data } = getResponse;
-                if(success){
+                case (success === true):
+                    feedback.success = true;
                     feedback.data = data.info[`users`];
-                }
+                    return feedback;
 
-            } else {
+                case (success === false && data?.message?.length > 0):
 
-                (data?.message ?? []).forEach((message) => {
-                    feedback.error.push(message);
-                })
-            };
+                    feedback.success = false;
+                    (data?.message ?? []).forEach((message) => {
+                        feedback.error.push(message);
+                    });
+                    return feedback;
 
-            return feedback;
+                case (status === 401):
+                    return redirect('/');
+
+                default:
+                    return redirect('/user');
+
+            }
 
         } catch (err) {
 
@@ -147,7 +155,7 @@ const profileRoute = {
                 Error in submitting user profile update
                 #Error : ${err}
                 `);
-
+            feedback.success = false;
             feedback.error.push('Fail on updating user profile. Please try again.')
 
             return feedback;
