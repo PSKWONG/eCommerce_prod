@@ -37,6 +37,11 @@ const ProfileContainer = () => {
         if (isUpdateSuccess && updatedUserInfo) {
 
             setIsEditable(false);
+
+        } else if(!isUpdateSuccess){
+
+            setIsEditable(true);
+            
         }
 
         return () => setIsEditable(false);
@@ -46,7 +51,9 @@ const ProfileContainer = () => {
     //Action for Controlling Editability
     const handleEditability = (event) => {
         event.preventDefault();
-        setIsEditable(isEditable ? false : true)
+        setIsEditable(isEditable ? false : true);
+
+        return () => dispatch(setErrorMsg([]));
     }
 
     /*************** Update User Info of Redux Store ****************** */
