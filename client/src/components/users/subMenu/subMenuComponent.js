@@ -8,9 +8,6 @@ import MenuItemCompnent from '../../../components/masterPage/menuItem/MenuItemCo
 
 const UserPortalMenuComponent = () => {
 
-    console.log('Menu Items', menuItems)
-
-
     //Navigation Menu 
     let portalMenuContent = [];
     portalMenuContent = (menuItems ?? []).map((item, index) => {

@@ -7,7 +7,6 @@ import { redirect } from 'react-router-dom';
 /***************Import Internal Modules****************** */
 import ProfileContainer from './ProfileContainer';
 import api from '../../../api/apiConnector';
-import returnConstruct from '../../app/utilities/returnObjConstructor';
 
 
 
@@ -33,7 +32,7 @@ const profileRoute = {
             //Conditional feedback from Loader 
             if (success) {
                 feedback.data = data.info[`users`];
-            }else{
+            } else {
                 feedback.error.push('Fail on retrieving user profile. Please try again.')
             }
 
@@ -60,7 +59,9 @@ const profileRoute = {
 
         //Data Return
         let feedback = {
+            success: false,
             path: null,
+            data: null,
             error: []
         };
 
@@ -117,18 +118,27 @@ const profileRoute = {
             const { success, data } = response;
 
             //Conditional Response 
-            if (success && data?.path) {
+            if (success) {
 
-                feedback.path = data?.path; 
+                feedback.success = true;
+
+                //Get Data from API Server ( User )
+                const getResponse = await api.get('/users/profile');
+
+                //Extract Information 
+                const { success, data } = getResponse;
+                if(success){
+                    feedback.data = data.info[`users`];
+                }
 
             } else {
 
                 (data?.message ?? []).forEach((message) => {
                     feedback.error.push(message);
                 })
-            }; 
+            };
 
-            return feedback; 
+            return feedback;
 
         } catch (err) {
 
@@ -136,10 +146,10 @@ const profileRoute = {
             console.log(`
                 Error in submitting user profile update
                 #Error : ${err}
-                `); 
-            
+                `);
+
             feedback.error.push('Fail on updating user profile. Please try again.')
-            
+
             return feedback;
 
         }

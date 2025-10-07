@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 /***************Import Internal Modules****************** */
 import SubMenuPageTemplate from '../pageTemplate/subMenuPage/SubMenuPageContainer'; 
 import SubMenuComponent from '../../components/users/subMenu/subMenuComponent'; 
+import profileroute from './profile/profileRoute'; 
 
 
 
@@ -12,6 +13,7 @@ const userRoute = {
     element:
         <SubMenuPageTemplate subMenu={SubMenuComponent} />,      
     children: [
+        profileroute
     ]
 }
 

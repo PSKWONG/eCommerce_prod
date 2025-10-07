@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 /***************Import Internal Modules****************** */
 import ProfileComponent from '../../../components/users/profile/ProfileComponent';
 import { setUserInfo, setErrorMsg } from '../../../features/authentication/authenticationSlice';
-import { selectAuthenLoadingStatus, selectErrorMsg, selectErrorState } from '../../../features/authentication/authenticationSlice';
+import { selectLoadingStatus, selectErrorMsg, selectErrorState } from '../../../features/authentication/authenticationSlice';
 
 
 
@@ -25,20 +25,34 @@ const ProfileContainer = () => {
     /***************Retrieve Authentication Status && Info ****************** */
     const userInfo = useLoaderData().data;
 
-    /*************** Update User Info of Redux Store ****************** */
-    useEffect(() => {
-        dispatch(setUserInfo(userInfo));
-    }, [userInfo, dispatch])
-
-
-    /*************** Handle User Info Update ****************** */
+    /***************Retrieve Updated Info ****************** */
+    const updatedUserInfo = useActionData()?.data ?? null;
+    const isUpdateSuccess = useActionData()?.success ?? true;
     const [isEditable, setIsEditable] = useState(false);
+
+    useEffect(() => {
+
+        console.log(`Profile Container / isUpdateSuccess : ${isUpdateSuccess}`);
+
+        if (isUpdateSuccess && updatedUserInfo) {
+
+            setIsEditable(false);
+        }
+
+        return () => setIsEditable(false);
+
+    }, [isUpdateSuccess, updatedUserInfo])
 
     //Action for Controlling Editability
     const handleEditability = (event) => {
         event.preventDefault();
         setIsEditable(isEditable ? false : true)
     }
+
+    /*************** Update User Info of Redux Store ****************** */
+    useEffect(() => {
+        dispatch(setUserInfo(updatedUserInfo || userInfo));
+    }, [userInfo, updatedUserInfo, dispatch])
 
     /*************** Handle Errors ****************** */
     const errorActionMsg = useActionData()?.error ?? null;
@@ -62,7 +76,7 @@ const ProfileContainer = () => {
 
 
     /*************** Loading Status ****************** */
-    const isAuthenLoading = (useSelector(selectAuthenLoadingStatus) || navigation.state === 'loading') ?? true;
+    const isAuthenLoading = (useSelector(selectLoadingStatus) || navigation.state === 'loading') ?? true;
     const isSubmitting = navigation.state === 'submitting';
     const isLoaderResolving = navigation.state === 'loading';
 
