@@ -122,7 +122,6 @@ const profileRoute = {
 
             //If the request is sucessfull, extract the response from the AXIOS object
             const response = await api.put('/users/local/update', requestObj);
-            const response = await api.put('/users/local/update', requestObj);
 
             //Extract Information 
             const { success, status, data } = response;

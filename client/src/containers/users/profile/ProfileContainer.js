@@ -49,6 +49,7 @@ const ProfileContainer = () => {
     //Action for Controlling Editability
     const handleEditability = (event) => {
         event.preventDefault();
+        dispatch(setErrorMsg([])); 
         setIsEditable(isEditable ? false : true);
 
         return () => dispatch(setErrorMsg([]));
