@@ -3,7 +3,6 @@ import React from 'react';
 
 /***************Import Internal Modules****************** */
 import menuItems from '../../../containers/users/data/menuItems.json';
-//import styles from './portalMenu.module.css';
 import MenuItemCompnent from '../../../components/masterPage/menuItem/MenuItemComponent';
 
 const UserPortalMenuComponent = () => {

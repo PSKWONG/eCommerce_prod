@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 /***************Import Internal Modules****************** */
+import './selected.css'; 
 import styles from './menuItem.module.css';
 import IconSet from '../../app/iconSet/IconComponents';
 import { selectAuthenState } from '../../../features/authentication/authenticationSlice';
@@ -35,7 +36,7 @@ const MenuItemComponent = (props) => {
     //Get data for menu items 
     const type = props?.type ?? 'text';
     const menuItemData = props?.data ?? {};
-    const { label, path, ref } = menuItemData;
+    const { label, path, ref, selected } = menuItemData;
 
     //Actions
     const handleRedirect = (event) => {
@@ -56,7 +57,7 @@ const MenuItemComponent = (props) => {
 
         case (type === 'icon'):
             return (
-                <li onClick={handleRedirect} className={`${styles.item} ${styles.icon}`}>
+                <li onClick={handleRedirect} className={`${styles.item} ${styles.icon} ${selected?'selectedMenuItem':''}`}>
                     <IconSet data={ref} />
                     <span>{label}</span>
                 </li>
@@ -64,7 +65,7 @@ const MenuItemComponent = (props) => {
 
         default: //type = 'text' 
             return (
-                <li onClick={handleRedirect} className={`${styles.item} `}>
+                <li onClick={handleRedirect} className={`${styles.item}  ${selected?'selectedMenuItem':''}`}>
                     {label}
                 </li>
             )

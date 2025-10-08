@@ -35,7 +35,7 @@ const iconRegistration = {
     delivery: Delivery,
     payment: Payment,
     order:Order,
-    complete:Complete,
+    confirmation:Complete,
     burgerMenu: BurgerMenu,
     loading: Loading,
     Update:Update,

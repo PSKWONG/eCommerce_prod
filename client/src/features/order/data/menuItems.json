@@ -1,0 +1,33 @@
+[
+    {
+        "ref": "cart", 
+        "label": "Cart",
+        "path": "/user", 
+        "selected": false
+    },
+    {
+        "ref": "profile", 
+        "label": "Profile",
+        "path": "/",
+        "selected": false
+    },
+    {
+        "ref": "delivery", 
+        "label": "Delivery",
+        "path": "/",
+        "selected": false
+    },
+    {
+        "ref": "payment", 
+        "label": "Payment",
+        "path": "/",
+        "selected": false
+    },
+    {
+        "ref": "confirmation", 
+        "label": "Confirmation",
+        "path": "/",
+        "selected": false
+    }
+]
+    

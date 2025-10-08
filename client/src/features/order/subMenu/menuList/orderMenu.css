@@ -1,0 +1,48 @@
+
+
+.orderMenuWrapper{
+
+   min-width:100%;
+   box-sizing:border-box; 
+}
+
+
+
+.orderMenuWrapper{
+
+    display:flex; 
+    flex-direction:inherit; 
+    flex-wrap:inherit; 
+    justify-content:inherit; 
+    gap:5px;
+}
+
+
+
+.orderMenuWrapper li.selectedMenuItem{
+    background-color:white;
+    padding:15px;
+    border-radius:8px;
+
+}
+
+/********* Responsive Style *************/
+body.mobile .orderMenuWrapper li.selectedMenuItem {
+    border-bottom-left-radius:0px;
+    border-bottom-right-radius:0px;
+    margin-bottom:calc(0px - var(--boxpadding)); 
+}
+
+body.desktop .orderMenuWrapper,
+body.tablet .orderMenuWrapper {
+   gap:inherit;
+}
+
+body.desktop .orderMenuWrapper li.selectedMenuItem,
+body.tablet .orderMenuWrapper li.selectedMenuItem {
+
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+    margin-right:calc(0px - var(--boxpadding)); 
+
+}
