@@ -66,6 +66,7 @@ const profileRoute = {
         //Data Return
         let feedback = {
             success: null,
+            success: null,
             path: null,
             data: null,
             error: []
@@ -112,6 +113,7 @@ const profileRoute = {
         //Input Checking 
         if (feedback.error.length > 0) {
             feedback.success = false;
+            feedback.success = false;
             return feedback;
         }
 
@@ -119,6 +121,7 @@ const profileRoute = {
         try {
 
             //If the request is sucessfull, extract the response from the AXIOS object
+            const response = await api.put('/users/local/update', requestObj);
             const response = await api.put('/users/local/update', requestObj);
 
             //Extract Information 
@@ -155,6 +158,7 @@ const profileRoute = {
                 Error in submitting user profile update
                 #Error : ${err}
                 `);
+            feedback.success = false;
             feedback.success = false;
             feedback.error.push('Fail on updating user profile. Please try again.')
 
