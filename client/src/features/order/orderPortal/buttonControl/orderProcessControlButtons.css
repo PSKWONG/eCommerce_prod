@@ -1,0 +1,17 @@
+/* Buttons Wrapper*/
+.orderControlButtonsWrapper {
+
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap; 
+    min-width:100%;
+    justify-content:space-between; 
+
+}
+
+.orderControlButtonsWrapper button{
+
+    flex-grow:1;
+    margin:8px;
+    border-radius:15px;
+}

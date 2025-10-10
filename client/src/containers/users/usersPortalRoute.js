@@ -11,7 +11,9 @@ import profileroute from './profile/profileRoute';
 const userRoute = {
     path: '/user',
     element:
-        <SubMenuPageTemplate subMenu={SubMenuComponent} />,      
+        <SubMenuPageTemplate subMenu={SubMenuComponent}>
+            <Outlet />
+        </SubMenuPageTemplate>,      
     children: [
         profileroute
     ]

@@ -1,0 +1,13 @@
+
+/************* Order Portal Wrapper ************/
+.orderPortalWrapper{
+    min-height:100%;
+    min-width:100%;
+    box-sizing:inherit; 
+}
+
+.orderPortalWrapper{
+    display:flex; 
+    flex-direction:column;
+    justify-content:space-between;
+}

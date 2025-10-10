@@ -3,31 +3,36 @@
         "ref": "cart", 
         "label": "Cart",
         "path": "/user", 
-        "selected": false
+        "selected": false,
+        "instructions": [null, "Process to Check Out"]
     },
     {
         "ref": "profile", 
         "label": "Profile",
         "path": "/",
-        "selected": false
+        "selected": false,
+        "instructions": ["Back", "Process to Payment"]
     },
     {
         "ref": "delivery", 
         "label": "Delivery",
         "path": "/",
-        "selected": false
+        "selected": false,
+        "instructions": ["Back", "Process to Payment"]
     },
     {
         "ref": "payment", 
         "label": "Payment",
         "path": "/",
-        "selected": false
+        "selected": false,
+        "instructions": ["Back", null]
     },
     {
         "ref": "confirmation", 
         "label": "Confirmation",
         "path": "/",
-        "selected": false
+        "selected": false,
+        "instructions": [null, "OK"]
     }
 ]
     

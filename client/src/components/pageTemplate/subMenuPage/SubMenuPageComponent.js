@@ -1,9 +1,5 @@
 
 
-
-/***************Import external Modules****************** */
-import { Outlet } from 'react-router-dom';
-
 /***************Import Internal Modules****************** */
 import FunctionalPageComponent from '../functionalPage/FunctionalPageComponent';
 import './submenu.css';
@@ -20,7 +16,7 @@ const SubMenuPageComponent = (props) => {
                     {props.subMenu}
                 </div>
                 <div className={`subMenuTemplateContentWrapper`}>
-                    <Outlet />
+                    {props.children}
                 </div>
             </div>
         </FunctionalPageComponent>

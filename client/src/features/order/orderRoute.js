@@ -2,16 +2,17 @@
 import { Outlet } from 'react-router-dom';
 
 /***************Import Internal Modules****************** */
-import SubMenuPageTemplate from '../../containers/pageTemplate/subMenuPage/SubMenuPageContainer'; 
-import SubMenuComponent from './subMenu/menuList/menuListContainer'; 
+import OrderPortalComponent from './orderPortal/orderPortalContainer'; 
+import portalRoute from './orderPortal/orderPortalRoute'; 
 
 
 
 const orderRoute = {
     path: '/order',
     element:
-        <SubMenuPageTemplate subMenu={SubMenuComponent} />,      
+        <OrderPortalComponent />,    
     children: [
+        portalRoute
     ]
 }
 

@@ -10,13 +10,13 @@ This template is used to put the content into a SubMenu Page Template.
 import React, { useState, useEffect } from 'react';
 
 /***************Import Internal Modules****************** */
-import PageTemplate from '../../../components/pageTemplate/subMenuPage/SubMenuPageComponent'; 
+import PageTemplate from '../../../components/pageTemplate/subMenuPage/SubMenuPageComponent';
 
 
 const SubMenuPageContainer = (props) => {
 
     //Extract content from props
-    const {subMenu} = props
+    const { subMenu } = props
 
     //States for submenu component
     const [contentDisplayed, setContentDisplayed] = useState();
@@ -49,10 +49,14 @@ const SubMenuPageContainer = (props) => {
             return;
         }
 
-    }, [subMenu]); 
+    }, [subMenu]);
 
 
-    return <PageTemplate subMenu={contentDisplayed}/>
+    return (
+        <PageTemplate subMenu={contentDisplayed} >
+            {props.children}
+        </PageTemplate>
+    )
 
 
 }
