@@ -11,13 +11,19 @@ const orderController = {
     progressChecking: async (req, res) => {
 
         //Get the template for checking 
-        const template = req?.body ?? null;
+        const template = req?.body?.template ?? null;
 
         //Initiate response constructor 
         const response = responseConstructor();
 
         //******* Edge Handling - No template provided ***** */
         if (!template) {
+            //Internal Log 
+            console.log(`
+                    Unexpected Errors: Order / Progress Checking   
+                    Input: ${JSON.stringify(template, null, 2)}
+                    Error: No template is provided
+                    `)
             res.status(400).send();
         }
 
@@ -30,6 +36,7 @@ const orderController = {
 
             if (result) {
                 response.setInfo('order', result);
+                res.status(200).json(response.build()); 
                 return;
             } else {
                 //Internal Log

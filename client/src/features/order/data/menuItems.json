@@ -2,14 +2,14 @@
     {
         "ref": "cart", 
         "label": "Cart",
-        "path": "/user", 
+        "path": "/order", 
         "selected": false,
         "instructions": [null, "Process to Check Out"]
     },
     {
         "ref": "profile", 
         "label": "Profile",
-        "path": "/",
+        "path": "/order/profile",
         "selected": false,
         "instructions": ["Back", "Process to Payment"]
     },

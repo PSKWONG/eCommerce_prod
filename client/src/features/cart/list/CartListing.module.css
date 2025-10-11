@@ -1,0 +1,82 @@
+/* ****************** Content Wrapper ***************/
+
+
+.contentWrapper {
+    display:flex;
+    flex-direction:column;
+    flex-wrap:nowrap;
+    gap:5px;
+}
+
+
+/* ****************** Cart Listing  Wrapper ***************/
+.cartListWrapper{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+}
+
+/* ****************** Cart Item  Wrapper ***************/
+.cartItemWrapper{
+    border:1px solid rgba(145, 143, 143, 0.7); 
+    border-radius:10px;
+    padding:10px;
+}
+
+.cartItemWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+}
+
+.cartItemWrapper img {
+    flex-grow: 0;
+}
+
+.cartItemWrapper img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 5px solid white;
+    object-fit: cover;
+}
+
+.cartItemWrapper h1 {
+    flex-grow: 1;
+}
+
+
+.cartItemWrapper h1 {
+    margin: 0;
+    font-size: 1em;
+}
+
+
+
+/* ****************** Cart Detail  Wrapper ***************/
+.detailWrapper{
+    flex-grow:10;
+}
+
+.detailWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content:space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ****************** Cart Controller  Wrapper ***************/
+.cartcontrollerWrapper{
+    display:flex; 
+    flex-direction:row; 
+    justify-content:right; 
+}
+
+
+

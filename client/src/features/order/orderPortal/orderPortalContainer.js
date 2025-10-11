@@ -7,7 +7,7 @@ Logic:
 */
 
 /***************Import external Modules****************** */
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 
@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import SubMenuPageTemplate from '../../../containers/pageTemplate/subMenuPage/SubMenuPageContainer';
 import SubMenuComponent from './menuList/menuListContainer';
 import PageComponent from './orderPortalComponent';
-import { selectDataChecking } from '../orderSlice';
+import useProgressGuide from '../hook/progressGuide';
 
 /*************** Context for Sharing ****************** */
 export const OrderPortalDataSharing = createContext();
@@ -26,18 +26,10 @@ const OrderPortalContainer = () => {
 
 
     /*************** Set portal progress Data ****************** */
-    const progress = useSelector(selectDataChecking);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const currentIndex = useProgressGuide() ?? 0;
+    
 
-
-    //Set the current Index 
-    useEffect(() => {
-        const updatedIndex = progress.indexOf(false);
-        if(updatedIndex !== currentIndex){
-            setCurrentIndex(updatedIndex); 
-        }
-
-    }, [progress, currentIndex]);
+    console.log(`Order Portal Logging`);
 
 
     /***************Export Data****************** */

@@ -36,9 +36,6 @@ const progressChecker = createAsyncThunk(
                 templateArray.push(step.ref)
             });
 
-            //Checking 
-            console.log(`Data Checking Tempalte for server: ${JSON.stringify(templateArray, null, 2)}`)
-
             return templateArray;
         })();
 
@@ -50,7 +47,13 @@ const progressChecker = createAsyncThunk(
             const { success, data } = response;
 
             if (success) {
+
+                //Checking
+                console.log(`The return information: ${data?.info?.order}`); 
+
+
                 return data?.info?.order ?? null;
+                
             } else {
                 console.log(
                     `

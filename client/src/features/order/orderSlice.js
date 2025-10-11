@@ -66,7 +66,7 @@ const defaultProgressChecking = Array((orderProcess ?? []).length).fill(false);
 // Default Order States
 export const orderDataTemplate = {
     data: {
-        dataChecking: [...defaultProgressChecking]
+        progressChecking: [...defaultProgressChecking]
     },
     status: {
         isLoading: false,
@@ -94,17 +94,17 @@ const orderSlice = createSlice({
             .addCase(progressChecking.fulfilled, (state, action) => {
                 state.status.isLoading = false;
                 state.status.isError = false;
-                state.data.dataChecking = action?.payload?? defaultProgressChecking; 
+                state.data.progressChecking = action?.payload?? defaultProgressChecking; 
             })
             .addCase(progressChecking.rejected, (state, action) => {
                 state.status.isLoading = false;
                 state.status.isError = true;
                 state.status.errorMsg = action.error.message;
-                state.data.dataChecking = defaultProgressChecking; 
+                state.data.progressChecking = defaultProgressChecking; 
             })
     },
     selectors: {
-        selectDataChecking: (state) => state.data.dataChecking,
+        selectProgressChecking: (state) => state.data.progressChecking,
         isOrderLoading: (state) => state.status.isLoading
     }
 })
@@ -121,6 +121,6 @@ export const {
 
 //Export Store State
 export const {
-    selectDataChecking,
+    selectProgressChecking,
     isOrderLoading
 } = orderSlice.selectors;
