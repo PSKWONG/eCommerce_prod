@@ -49,7 +49,6 @@ const itemUpdater = createAsyncThunk(
 
         //Get latest cart data
         const updatedCartData = state().cart.data; 
-        console.log(`UpdatedCartData: ${JSON.stringify(updatedCartData, null,2)}`)
 
         //Load and Sync 
         dispatch(loadAndSync(updatedCartData)); 

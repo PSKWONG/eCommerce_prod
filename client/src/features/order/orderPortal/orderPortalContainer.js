@@ -7,7 +7,7 @@ Logic:
 */
 
 /***************Import external Modules****************** */
-import { useState, useEffect, createContext, useMemo } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { useSelector } from 'react-redux';
 
 
@@ -27,10 +27,6 @@ const OrderPortalContainer = () => {
 
     /*************** Set portal progress Data ****************** */
     const currentIndex = useProgressGuide() ?? 0;
-    
-
-    console.log(`Order Portal Logging`);
-
 
     /***************Export Data****************** */
     const portalProgressData = {

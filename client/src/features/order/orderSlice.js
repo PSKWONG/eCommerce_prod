@@ -32,6 +32,7 @@ import { createSlice } from '@reduxjs/toolkit';
 //import loadAndSync from './middlewares/loadAndSync'; 
 import orderProcess from './data/menuItems.json';
 import progressChecking from './middlewares/progressChecking';
+import dataChecking from './middlewares/dataChecker';
 
 
 
@@ -61,12 +62,16 @@ const dataCheckingTemplate = {
 /*************** States Default Values ****************** */
 
 //Data Checking template 
-const defaultProgressChecking = Array((orderProcess ?? []).length).fill(false); 
+const defaultProgressChecking = Array((orderProcess ?? []).length).fill(false);
 
 // Default Order States
 export const orderDataTemplate = {
     data: {
-        progressChecking: [...defaultProgressChecking]
+        progressChecking: [...defaultProgressChecking],
+        orderData: {
+            profile: {},
+            delivery: {}
+        }
     },
     status: {
         isLoading: false,
@@ -83,6 +88,14 @@ const orderSlice = createSlice({
     reducers: {
         resetOrder: (state) => {
             state = { ...orderDataTemplate };
+        },
+        setError: (state, action) => {
+
+            const errorChecking = action.payload?.length > 0 ?? false
+
+            state.status.isError = errorChecking ? true : false;
+            state.status.errorMsg = errorChecking ? action.payload : [];
+
         }
 
     },
@@ -94,17 +107,31 @@ const orderSlice = createSlice({
             .addCase(progressChecking.fulfilled, (state, action) => {
                 state.status.isLoading = false;
                 state.status.isError = false;
-                state.data.progressChecking = action?.payload?? defaultProgressChecking; 
+                state.data.progressChecking = action?.payload ?? defaultProgressChecking;
             })
             .addCase(progressChecking.rejected, (state, action) => {
                 state.status.isLoading = false;
                 state.status.isError = true;
-                state.status.errorMsg = action.error.message;
-                state.data.progressChecking = defaultProgressChecking; 
+                state.status.errorMsg = action?.error?.message;
+                state.data.progressChecking = defaultProgressChecking;
+            })
+            .addCase(dataChecking.pending, (state) => {
+                state.status.isLoading = true;
+            })
+            .addCase(dataChecking.fulfilled, (state) => {
+                state.status.isLoading = false;
+                state.status.isError = false;
+            })
+            .addCase(dataChecking.rejected, (state, action) => {
+                state.status.isLoading = false;
+                state.status.isError = true;
+                state.status.errorMsg = action?.error?.message || action?.payload;
+                state.data.progressChecking = defaultProgressChecking;
             })
     },
     selectors: {
         selectProgressChecking: (state) => state.data.progressChecking,
+        selectOrderData: (state) => state.data.orderData,
         isOrderLoading: (state) => state.status.isLoading
     }
 })
@@ -116,11 +143,13 @@ export default orderSlice.reducer;
 
 //Export Actions 
 export const {
-    resetOrder
+    resetOrder,
+    setError
 } = orderSlice.actions;
 
 //Export Store State
 export const {
     selectProgressChecking,
+    selectOrderData,
     isOrderLoading
 } = orderSlice.selectors;

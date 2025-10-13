@@ -65,7 +65,6 @@ const ItemControlContainer = (props) => {
         const setInitiateQTY = () => {
 
             if (cartItem) {
-                console.log(`Get the initial value of selected item: ${JSON.stringify(cartItem.quantity, null, 2)}`)
                 setQuantity(cartItem.quantity);
             } else {
                 setQuantity(0); // Reset for new item
@@ -100,8 +99,6 @@ const ItemControlContainer = (props) => {
         const updateCart = () => {
 
             if (updateAction) {
-
-                console.log('Item controller / updatedCartItem', updatedCartItem)
 
                 //Dispatch for Item Update 
                 dispatch(itemUpdater(updatedCartItem))
