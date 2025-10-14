@@ -73,7 +73,8 @@ Create table orders (
     cost NUMERIC(10,2) not null,
     client_secret varchar(300) Unique,
     payment_id varchar(300) Unique, 
-    user_id integer not null,
+    user_id integer,
+    non_user_profile JSON,
     CONSTRAINT fk_user
       FOREIGN KEY (user_id)
         REFERENCES users(id)

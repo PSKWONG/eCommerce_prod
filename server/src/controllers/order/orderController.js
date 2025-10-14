@@ -6,6 +6,7 @@ Order Controller
 
 /***************Import Internal Modules****************** */
 const responseConstructor = require('../../modules/constructors/responseConstructor');
+const dataChecker = require('./helper/dataChecker');
 
 const orderController = {
     progressChecking: async (req, res) => {
@@ -36,7 +37,7 @@ const orderController = {
 
             if (result) {
                 response.setInfo('order', result);
-                res.status(200).json(response.build()); 
+                res.status(200).json(response.build());
                 return;
             } else {
                 //Internal Log
@@ -61,7 +62,68 @@ const orderController = {
             return;
         }
 
+    },
+    dataChecking: async (req, res) => {
+
+        //Get the data for checking 
+        const { section, sectionData } = req?.body ?? {};
+
+        //Initiate response constructor 
+        const response = responseConstructor();
+
+        //Initiate the checker process; 
+        try {
+            const isValid = dataChecker(req, response);
+
+            //Initiate / Update the order session
+            req.session.order = {
+                process: {
+                    [section] : isValid
+                }
+            };
+
+            if (isValid) {
+                res.status(200).send();
+                return;
+            } else {
+
+                //Internal Log 
+                console.log(
+                    `
+                    Error in Order Data Checking / Data Checker 
+                    #Input: 
+                        - section: ${JSON.stringify(section, null, 2)}
+                        - sectionData: ${JSON.stringify(sectionData, null, 2)}
+                    #Error: Validation Fail 
+                    `
+                );
+
+                res.status(400).json(response.build());
+                return;
+            }
+
+
+        } catch (err) {
+
+            //Internal Log 
+            console.log(
+                `
+                    Unexpected Error in Order Data Checking / Data Checker 
+                    #Input: 
+                        - section: ${JSON.stringify(section, null, 2)}
+                        - sectionData: ${JSON.stringify(sectionData, null, 2)}
+                    #Error: ${err}
+                    `
+            );
+
+            res.status(400).json(response.build());
+
+            return;
+
+        }
+
     }
+
 };
 
 module.exports = orderController; 

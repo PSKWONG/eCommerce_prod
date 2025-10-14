@@ -8,6 +8,7 @@ const orderController = require('./orderController');
 
 
 orderRouter.post('/progress', orderController.progressChecking);
+orderRouter.post('/dataChecking', orderController.dataChecking);
 
 
 /*********** Export Modules **************** */

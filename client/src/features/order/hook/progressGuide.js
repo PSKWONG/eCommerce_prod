@@ -63,9 +63,6 @@ const useProgressGuide = () => {
     const checkingResult = useSelector(selectProgressChecking, shallowEqual);
 
 
-
-
-
     useEffect(() => {
 
         //If slice is loading OR access the index page, skip the checking 
@@ -78,26 +75,17 @@ const useProgressGuide = () => {
 
         //If the previous is not ready to visit, user is redirected to the last page user stopped
         if (!isValidForNavigation) {
-            setSelectedIndex(orderProcess.indexOf(false));
+            const newIndex = orderProcess.indexOf(false)
+            setSelectedIndex(newIndex);
+            navigate(orderProcess[newIndex ?? 0].path);
+
         }
 
 
-    }, [checkingResult, selectedIndex])
-
-
-
-    //Handle Navigation 
-    useEffect(() => {
-
-        navigate(orderProcess[selectedIndex ?? 0].path);
-
-    }, [selectedIndex, navigate])
-
-
+    }, [checkingResult, selectedIndex, navigate])
 
     //Export Data 
     return selectedIndex;
-
 
 };
 

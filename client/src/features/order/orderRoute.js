@@ -1,9 +1,9 @@
 /***************Import external Modules****************** */
-import { Outlet } from 'react-router-dom';
 
 /***************Import Internal Modules****************** */
 import OrderPortalComponent from './orderPortal/orderPortalContainer'; 
 import cartListingRoute from '../cart/list/cartListingRoute'; 
+import profileRoute from './profile/profileRoute'; 
 
 
 
@@ -12,7 +12,8 @@ const orderRoute = {
     element:
         <OrderPortalComponent />,    
     children: [
-        cartListingRoute
+        cartListingRoute,
+        profileRoute
     ]
 }
 

@@ -49,7 +49,6 @@ const cartController = {
 
             req.session.cart = localVersion > remoteVersion ? localData : remoteData;
 
-
             next();
 
         }
@@ -85,10 +84,6 @@ const cartController = {
             next();
             return;
         }
-
-
-
-        
 
 
         /*************** Session Data ****************** */

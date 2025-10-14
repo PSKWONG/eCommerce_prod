@@ -17,7 +17,7 @@ Logic:
 /***************Import external Modules****************** */
 import { useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigation } from 'react-router';
+import { useNavigate } from 'react-router';
 
 /***************Import Internal Modules****************** */
 import api from '../../../../api/apiConnector';
@@ -33,7 +33,7 @@ import { selectOrderData } from '../../orderSlice';
 const ButtonControlContainer = () => {
 
     //Hook Actions
-    const navigate = useNavigation();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     /*************** Get selected Index ****************** */
@@ -48,24 +48,29 @@ const ButtonControlContainer = () => {
     /***************Button Actions****************** */
     const handleCancellation = (event) => {
         event.preventDefault();
-        dispatch(resetOrder()); 
+        dispatch(resetOrder());
         navigate('/order');
-        return; 
+        return;
     };
 
     const handleForward = async (event) => {
 
         event.preventDefault();
 
-        //Posting data to API Server 
+
         try {
 
+            //Posting data to API Server 
             const response = await api.post('/order/dataChecking', { section, sectionData });
             const { success, data } = response;
 
+            //Checking
+            console.log(`Order Response Checking: ${JSON.stringify(response, null, 2)} `)
+
+            //If data checking is success, move to the path of next index 
             if (success) {
-                navigate('/');
-                return
+                navigate(process[(currentIndex + 1)].path);
+                return;
             } else {
 
                 //Internal Log 
@@ -78,8 +83,9 @@ const ButtonControlContainer = () => {
                         * ${JSON.stringify((data?.message ?? ''), null, 2)}
                 `);
 
+                //Set Error Message to slice 
                 dispatch(setError(data?.message ?? []));
-                return; 
+                return;
 
             }
 
@@ -94,9 +100,10 @@ const ButtonControlContainer = () => {
                     Error : ${JSON.stringify(err, null, 2)}
             `);
 
+            //Set Error Message to slice 
             dispatch(setError(['Internal Error. Please try again later.']));
 
-            return; 
+            return;
 
         }
 
@@ -105,6 +112,7 @@ const ButtonControlContainer = () => {
 
     const handleBackward = (event) => {
         event.preventDefault();
+        navigate(process[((currentIndex - 1)?? 0 )].path);
     };
 
 
