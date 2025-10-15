@@ -39,8 +39,6 @@ const useProgressGuide = () => {
     //Index of path 
     const [selectedIndex, setSelectedIndex] = useState(0);
 
-
-
     //Set Index of path 
     useEffect(() => {
 
@@ -59,14 +57,14 @@ const useProgressGuide = () => {
 
 
     //Get the progress checking result from server 
-    //const isLoading = useSelector(isOrderLoading, shallowEqual);
+    const isLoading = useSelector(isOrderLoading, shallowEqual);
     const checkingResult = useSelector(selectProgressChecking, shallowEqual);
 
 
     useEffect(() => {
 
         //If slice is loading OR access the index page, skip the checking 
-        if (selectedIndex === 0) {
+        if (selectedIndex === 0 || isLoading) {
             return;
         }
 
@@ -77,12 +75,11 @@ const useProgressGuide = () => {
         if (!isValidForNavigation) {
             const newIndex = orderProcess.indexOf(false)
             setSelectedIndex(newIndex);
-            navigate(orderProcess[newIndex ?? 0].path);
-
+            navigate(orderProcess[(newIndex ?? 0)]?.path );
+            return; 
         }
 
-
-    }, [checkingResult, selectedIndex, navigate])
+    }, [checkingResult, selectedIndex, isLoading, navigate])
 
     //Export Data 
     return selectedIndex;

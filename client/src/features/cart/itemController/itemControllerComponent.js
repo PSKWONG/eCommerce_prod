@@ -1,6 +1,5 @@
 /***************Import external Modules****************** */
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 /***************Import Internal Modules****************** */
 import styles from './itemController.module.css';
@@ -12,7 +11,6 @@ import IconSet from '../../../components/app/iconSet/IconComponents';
 const ItemControlComponent = React.memo((props) => {
 
     //Hook actions
-    const dispatch = useDispatch();
 
     //Extract information from props
     const { data, status, controllerStyle } = props.itemController;

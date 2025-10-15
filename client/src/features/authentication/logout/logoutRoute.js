@@ -3,7 +3,6 @@ Route on handling Logout process
 */
 
 /***************Import External Modules****************** */
-import { redirect } from 'react-router-dom';
 
 
 /***************Import Internal Modules****************** */

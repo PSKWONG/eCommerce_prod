@@ -66,7 +66,6 @@ const profileRoute = {
         //Data Return
         let feedback = {
             success: null,
-            success: null,
             path: null,
             data: null,
             error: []

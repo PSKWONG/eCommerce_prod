@@ -32,7 +32,7 @@ import { createSlice } from '@reduxjs/toolkit';
 //import loadAndSync from './middlewares/loadAndSync'; 
 import orderProcess from './data/menuItems.json';
 import progressChecking from './middlewares/progressChecking';
-import dataChecking from './middlewares/dataChecker';
+import dataChecking from './middlewares/dataChecking';
 
 
 
@@ -68,10 +68,7 @@ const defaultProgressChecking = Array((orderProcess ?? []).length).fill(false);
 export const orderDataTemplate = {
     data: {
         progressChecking: [...defaultProgressChecking],
-        orderData: {
-            profile: {},
-            delivery: {}
-        }
+        orderData: {}
     },
     status: {
         isLoading: false,
@@ -86,6 +83,21 @@ const orderSlice = createSlice({
     name: 'order',
     initialState: { ...orderDataTemplate },
     reducers: {
+        updateOrderData: (state, action) => {
+            const { currentIndex, sectionData } = action?.payload ?? {};
+
+            if (!currentIndex || !sectionData) {
+                return;
+            } else {
+                const updateData = {
+                    ...state.data.orderData,
+                    [orderProcess[currentIndex].ref]: sectionData
+                };
+                state.data.orderData = updateData;
+                console.log(`Updated Order Data: ${JSON.stringify(state.data.orderData, null , 2)}`); 
+            }
+
+        },
         resetOrder: (state) => {
             state = { ...orderDataTemplate };
         },
@@ -125,13 +137,13 @@ const orderSlice = createSlice({
             .addCase(dataChecking.rejected, (state, action) => {
                 state.status.isLoading = false;
                 state.status.isError = true;
-                state.status.errorMsg = action?.error?.message || action?.payload;
-                state.data.progressChecking = defaultProgressChecking;
+                state.status.errorMsg = action?.payload;
             })
     },
     selectors: {
         selectProgressChecking: (state) => state.data.progressChecking,
         selectOrderData: (state) => state.data.orderData,
+        selectErrorMsg: (state) => state.status.errorMsg,
         isOrderLoading: (state) => state.status.isLoading
     }
 })
@@ -143,6 +155,7 @@ export default orderSlice.reducer;
 
 //Export Actions 
 export const {
+    updateOrderData,
     resetOrder,
     setError
 } = orderSlice.actions;
@@ -151,5 +164,6 @@ export const {
 export const {
     selectProgressChecking,
     selectOrderData,
+    selectErrorMsg,
     isOrderLoading
 } = orderSlice.selectors;

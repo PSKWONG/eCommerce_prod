@@ -1,7 +1,6 @@
 
 /***************Import Internal Modules****************** */
 import './featurePage.css';
-import pageStyles from '../../pageTemplate/styles/shaddowContainer.module.css';
 
 
 const FeaturePageComponent = ({ children, bannerControl }) => {

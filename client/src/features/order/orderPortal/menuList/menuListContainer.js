@@ -25,9 +25,11 @@ const MenuListContainer = () => {
     /*************** Update Menu Item ****************** */
     useEffect(() => {
 
-        const updatedItems = [...menuItems];
-        updatedItems[currentIndex].selected = true;
-        setUpdatedMenuItems(updatedItems);
+        if (currentIndex >= 0 && menuItems.length > 0) {
+            let updatedItems = (menuItems ?? []).map(item => ({ ...item }));
+            updatedItems[currentIndex].selected = true;
+            setUpdatedMenuItems(updatedItems);
+        }
 
     }, [currentIndex]);
 

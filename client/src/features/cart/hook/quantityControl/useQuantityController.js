@@ -5,7 +5,7 @@ A Hook for exporting the required controller on using quantityControl
 
 
 /***************Import external Modules****************** */
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const useQunatityController = () => {
 

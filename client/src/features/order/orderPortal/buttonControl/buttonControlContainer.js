@@ -15,18 +15,16 @@ Logic:
 */
 
 /***************Import external Modules****************** */
-import { useState, useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 /***************Import Internal Modules****************** */
-import api from '../../../../api/apiConnector';
 import process from '../../data/menuItems.json';
 import PageComponent from './buttonControlComponent';
 import { OrderPortalDataSharing } from '../orderPortalContainer';
-import { setError, resetOrder } from '../../orderSlice';
-import { selectOrderData } from '../../orderSlice';
-//import dataChecker from '../../middlewares/dataChecker';
+import useDataChecker from '../../hook/dataChecker';
+import { resetOrder } from '../../orderSlice';
 
 
 
@@ -40,10 +38,8 @@ const ButtonControlContainer = () => {
     const { data } = useContext(OrderPortalDataSharing).portalProgressData ?? {};
     const currentIndex = data?.currentIndex ?? 0;
 
-    /*************** Get Order Store data ****************** */
-    const orderStoreData = useSelector(selectOrderData) ?? {};
-    const section = process[currentIndex].ref ?? null;
-    const sectionData = orderStoreData.section ?? null;
+    /*************** Initiate Data Checker ****************** */
+    const dataChecker = useDataChecker(currentIndex);
 
     /***************Button Actions****************** */
     const handleCancellation = (event) => {
@@ -57,62 +53,13 @@ const ButtonControlContainer = () => {
 
         event.preventDefault();
 
-
-        try {
-
-            //Posting data to API Server 
-            const response = await api.post('/order/dataChecking', { section, sectionData });
-            const { success, data } = response;
-
-            //Checking
-            console.log(`Order Response Checking: ${JSON.stringify(response, null, 2)} `)
-
-            //If data checking is success, move to the path of next index 
-            if (success) {
-                navigate(process[(currentIndex + 1)].path);
-                return;
-            } else {
-
-                //Internal Log 
-                console.log(`
-                    Error in Order / Data Checking 
-                    Input : 
-                        * Secion :  ${JSON.stringify(section, null, 2)}  
-                        * Section Data : ${JSON.stringify(sectionData, null, 2)}   
-                    Error Message: 
-                        * ${JSON.stringify((data?.message ?? ''), null, 2)}
-                `);
-
-                //Set Error Message to slice 
-                dispatch(setError(data?.message ?? []));
-                return;
-
-            }
-
-
-        } catch (err) {
-            //Internal Log 
-            console.log(`
-                    Error in Order / Data Checking 
-                    Input : 
-                        * Secion : ${JSON.stringify(section, null, 2)}   
-                        * Section Data : ${JSON.stringify(sectionData, null, 2)}   
-                    Error : ${JSON.stringify(err, null, 2)}
-            `);
-
-            //Set Error Message to slice 
-            dispatch(setError(['Internal Error. Please try again later.']));
-
-            return;
-
-        }
-
+        dataChecker();
 
     };
 
     const handleBackward = (event) => {
         event.preventDefault();
-        navigate(process[((currentIndex - 1)?? 0 )].path);
+        navigate(process[((currentIndex - 1) ?? 0)].path);
     };
 
 
@@ -137,4 +84,4 @@ const ButtonControlContainer = () => {
 
 };
 
-export default ButtonControlContainer; 
+export default ButtonControlContainer;

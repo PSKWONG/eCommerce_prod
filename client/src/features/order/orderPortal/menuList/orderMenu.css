@@ -21,23 +21,31 @@
 
 .orderMenuWrapper li.selectedMenuItem{
     background-color:white;
-    padding:15px;
+    padding:5px;
     border-radius:8px;
 
 }
 
 /********* Responsive Style *************/
-body.mobile .orderMenuWrapper li.selectedMenuItem {
-    border-bottom-left-radius:0px;
-    border-bottom-right-radius:0px;
-    margin-bottom:calc(0px - var(--boxpadding)); 
+body.mobile .orderMenuWrapper {
+    align-items:center; 
 }
+
+body.mobile .orderMenuWrapper li .iconItem {
+    display:none; 
+}
+
+body.mobile .orderMenuWrapper li.selectedMenuItem {
+    display:flex; 
+}
+
 
 body.desktop .orderMenuWrapper,
 body.tablet .orderMenuWrapper {
    gap:inherit;
 }
 
+/*
 body.desktop .orderMenuWrapper li.selectedMenuItem,
 body.tablet .orderMenuWrapper li.selectedMenuItem {
 
@@ -46,3 +54,4 @@ body.tablet .orderMenuWrapper li.selectedMenuItem {
     margin-right:calc(0px - var(--boxpadding)); 
 
 }
+*/
