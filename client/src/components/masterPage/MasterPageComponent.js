@@ -31,8 +31,6 @@ const MasterPageComponent = React.memo(() => {
     const { navMenuItems, funcMenuItems, mobileMenuItems } = data ?? {};
     const { showPortal } = actions ?? {};
 
-
-
     /*
     Generate Navigation Menu Items by feeding information from "navMenuItems"
     */

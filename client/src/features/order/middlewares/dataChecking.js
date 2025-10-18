@@ -18,26 +18,23 @@ import process from '../data/menuItems.json';
 
 const dataChecking = createAsyncThunk(
     'order/dataChecking',
-    async (indexChecker, thunkAPI) => {
+    async (section, thunkAPI) => {
 
         //Get the API function
-        const state = thunkAPI.getState;
+        const state = thunkAPI.getState();
         //const dispatch = thunkAPI.dispatch;
 
-        //Get the data from index Checker 
-        const {currentIndex, navigate} = indexChecker; 
 
         /*************** Checking of input ****************** */
-        console.log(`Get the data from current Index: ${JSON.stringify(indexChecker, null, 2)}`);
+        //console.log(`Get the data from current Index: ${JSON.stringify(indexChecker, null, 2)}`);
 
-        if (!currentIndex) {
-            navigate(process[0].path);
-        }
 
         /*************** Get Order Store data ****************** */
         const orderStoreData = state?.order?.data?.orderData ?? {};
-        const section = process[currentIndex].ref ?? null;
-        const sectionData = orderStoreData.section ?? null;
+        const sectionData = orderStoreData[section] ?? null;
+
+        //Checking
+        console.log(`Order Store Data ${JSON.stringify(orderStoreData, null, 2)}`)
 
 
         try {
@@ -51,7 +48,6 @@ const dataChecking = createAsyncThunk(
 
             //If data checking is success, move to the path of next index 
             if (success) {
-                navigate(process[(currentIndex + 1)].path);
                 return;
             } else {
 
@@ -79,7 +75,7 @@ const dataChecking = createAsyncThunk(
                         * Section Data : ${JSON.stringify(sectionData, null, 2)}   
                     Error : ${JSON.stringify(err, null, 2)}
                 `);
-                
+
             //Set Error Message to slice 
             return thunkAPI.rejectWithValue(['Internal Error. Please try again later.']);
         }

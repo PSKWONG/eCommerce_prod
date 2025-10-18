@@ -13,76 +13,91 @@ Logic
 
 
 /***************Import external Modules****************** */
-import { useState, useEffect } from 'react';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-
-
+import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
 /***************Import Internal Modules****************** */
-import orderProcess from '../data/menuItems.json';
-import progresschecking from '../middlewares/progressChecking';
-import { isOrderLoading, selectProgressChecking } from '../orderSlice';
+import { OrderPortalDataSharing } from '../orderPortal/orderPortalContainer';
+import cancellingHandler from '../middlewares/cancelOrder';
+import progressHandler from '../middlewares/progressHandler';
 
 const useProgressGuide = () => {
 
-    //Hook Action 
+    //Hook Actions
+    //const navigate = useNavigate();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+
+    /*************** Get selected Index ****************** */
+    const { data, actions } = useContext(OrderPortalDataSharing).portalProgressData ?? {};
+    const { currentIndex, progressGuide } = data ?? {};
+    const { setCurrentIndex } = actions;
+
+    /***************Button Actions****************** */
+    const handleCancellation = async (event) => {
+
+        event.preventDefault();
+
+        try {
+
+            const result = await dispatch(cancellingHandler()).unwrap();
+
+            if (result === true) {
+                setCurrentIndex(0);
+            }
+
+            return;
+
+        } catch (err) {
+
+            setCurrentIndex((prev) => prev);
+            return;
+
+        }
 
 
-    //Get the path of page 
-    const location = useLocation();
 
-    console.log(`Return of Location, ${JSON.stringify(location, null, 2)}`);
+    };
 
-    //Index of path 
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const handleForward = async (event) => {
 
-    //Set Index of path 
-    useEffect(() => {
+        if(event){
+            event.preventDefault();
+        }
 
-        //Set the latest Index 
-        const indexOfPath = orderProcess.findIndex((steps) => {
-            return steps.path === location.pathname
-        });
-
-        setSelectedIndex(indexOfPath);
-
-        //Get the latest progress index from server
-        dispatch(progresschecking());
-
-    }, [location, dispatch]);
+        const result = await dispatch(progressHandler({ currentIndex, progressGuide })).unwrap();
 
 
+        if (result === true) {
+            setCurrentIndex((prev) => {
+                return prev + 1;
+            })
 
-    //Get the progress checking result from server 
-    const isLoading = useSelector(isOrderLoading, shallowEqual);
-    const checkingResult = useSelector(selectProgressChecking, shallowEqual);
-
-
-    useEffect(() => {
-
-        //If slice is loading OR access the index page, skip the checking 
-        if (selectedIndex === 0 || isLoading) {
             return;
         }
 
-        //Get the progress checking of previous page 
-        const isValidForNavigation = checkingResult[(selectedIndex - 1)];
+        setCurrentIndex((prev) => prev);
 
-        //If the previous is not ready to visit, user is redirected to the last page user stopped
-        if (!isValidForNavigation) {
-            const newIndex = orderProcess.indexOf(false)
-            setSelectedIndex(newIndex);
-            navigate(orderProcess[(newIndex ?? 0)]?.path );
-            return; 
-        }
+        return;
 
-    }, [checkingResult, selectedIndex, isLoading, navigate])
+    };
 
-    //Export Data 
-    return selectedIndex;
+    const handleBackward = (event) => {
+        event.preventDefault();
+        setCurrentIndex((prev) => {
+            if (prev > 0) {
+                return prev - 1;
+            }
+            return prev
+        })
+        return;
+    };
+
+
+    return {
+        handleCancellation,
+        handleForward,
+        handleBackward
+    }
 
 };
 

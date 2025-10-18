@@ -17,6 +17,10 @@
     gap:5px;
 }
 
+.orderMenuWrapper li {
+    cursor:default; 
+}
+
 
 
 .orderMenuWrapper li.selectedMenuItem{
@@ -45,13 +49,3 @@ body.tablet .orderMenuWrapper {
    gap:inherit;
 }
 
-/*
-body.desktop .orderMenuWrapper li.selectedMenuItem,
-body.tablet .orderMenuWrapper li.selectedMenuItem {
-
-    border-top-right-radius:0px;
-    border-bottom-right-radius:0px;
-    margin-right:calc(0px - var(--boxpadding)); 
-
-}
-*/

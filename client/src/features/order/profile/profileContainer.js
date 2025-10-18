@@ -2,7 +2,7 @@
 */
 
 /***************Import external Modules****************** */
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,8 +10,8 @@ import { useNavigate } from 'react-router-dom';
 /***************Import Internal Modules****************** */
 import { selectAuthenState } from '../../authentication/authenticationSlice';
 import { OrderPortalDataSharing } from '../orderPortal/orderPortalContainer';
-import { updateOrderData, setError } from '../orderSlice';
-import useDataChecker from '../hook/dataChecker';
+import { updateOrderData } from '../orderSlice';
+import useProgressGuide from '../hook/progressGuide';
 import ProfileComponent from './profileComponent';
 
 
@@ -22,15 +22,17 @@ const defaultProfileData = {
     email: '',
 }
 
-const ProfileContainer = () => {
+const ProfileContainer = React.memo(() => {
 
     //Hook for actions
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    // Import Progress Guide Action 
+    const { handleForward } = useProgressGuide();
+
     /*************** Data Checker  ****************** */
     const currentIndex = useContext(OrderPortalDataSharing).portalProgressData?.data?.currentIndex ?? 0;
-    const dataChecker = useDataChecker(currentIndex);
 
     /*************** Profile Infromation  ****************** */
     //Store for the Form Data ( Exported Data )
@@ -39,23 +41,23 @@ const ProfileContainer = () => {
     const isAuthen = useSelector(selectAuthenState);
 
 
-    //Update the information for authentication status
+    //Handle the authentication skipping 
     useEffect(() => {
 
-        //If user is authenticated 
-        if (isAuthen) {
-
-            //Initiate the upload process
-            dataChecker()
-
-            //Checking 
-            console.log(`Authenticated User `);
-
-            return;
-
+        const handleAuthenUser = async () => {
+            if (isAuthen) {
+                handleForward();
+            }
         }
+        handleAuthenUser(); 
 
-    }, [isAuthen, profileData, currentIndex,  dataChecker, dispatch, navigate]);
+    }, [])
+
+
+
+
+
+
 
     /*************** Actions for form ****************** */
     //Handle input value for action of onChange
@@ -74,9 +76,14 @@ const ProfileContainer = () => {
             }
         ));
 
-        //Update the readiness of the section
-        dispatch(setError([]));
     }
+
+    //Handle Sync of data change between store and form 
+    useEffect(() => {
+        //Update the readiness of the section
+        dispatch(updateOrderData({ currentIndex, sectionData: profileData }))
+    }, [profileData, currentIndex, dispatch])
+
 
     //Handle Login / Sign up redirecting 
     const handleLogin = (event) => {
@@ -98,6 +105,6 @@ const ProfileContainer = () => {
 
     return <ProfileComponent data={data} action={action} />
 
-};
+});
 
 export default ProfileContainer; 

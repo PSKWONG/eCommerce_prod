@@ -9,6 +9,7 @@ const orderController = require('./orderController');
 
 orderRouter.post('/progress', orderController.progressChecking);
 orderRouter.post('/dataChecking', orderController.dataChecking);
+orderRouter.post('/cancel', orderController.cancelOrder);
 
 
 /*********** Export Modules **************** */

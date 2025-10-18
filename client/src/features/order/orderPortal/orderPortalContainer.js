@@ -7,7 +7,7 @@ Logic:
 */
 
 /***************Import external Modules****************** */
-import { useState, useEffect, createContext } from 'react';
+import React, { useState , createContext } from 'react';
 import { useSelector } from 'react-redux';
 
 
@@ -15,7 +15,13 @@ import { useSelector } from 'react-redux';
 import SubMenuPageTemplate from '../../../containers/pageTemplate/subMenuPage/SubMenuPageContainer';
 import SubMenuComponent from './menuList/menuListContainer';
 import PageComponent from './orderPortalComponent';
-import useProgressGuide from '../hook/progressGuide';
+import progressGuide from '../data/menuItems.json';
+import usePageSelector from './progressGuide/pageSelector';
+
+
+
+import { isOrderLoading, selectErrorMsg } from '../orderSlice';
+
 
 /*************** Context for Sharing ****************** */
 export const OrderPortalDataSharing = createContext();
@@ -26,22 +32,28 @@ const OrderPortalContainer = () => {
 
 
     /*************** Set portal progress Data ****************** */
-    const currentIndex = useProgressGuide() ?? 0;
+    const [currentIndex, setCurrentIndex ]  = useState(0);
+
+    /*************** Set Display Element  ****************** */
+    const displayElement = usePageSelector(currentIndex, progressGuide);
+
 
     /***************Export Data****************** */
     const portalProgressData = {
         data: {
-            currentIndex
-        },
-        status: {
+            currentIndex,
+            progressGuide,
 
+        },
+        actions: {
+            setCurrentIndex
         }
     }
 
 
 
     return (
-        <OrderPortalDataSharing.Provider value={{ portalProgressData }}>
+        <OrderPortalDataSharing.Provider value={{ portalProgressData, displayElement }}>
             <SubMenuPageTemplate subMenu={SubMenuComponent} >
                 <PageComponent />
             </SubMenuPageTemplate>

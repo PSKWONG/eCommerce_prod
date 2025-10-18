@@ -136,6 +136,14 @@ const basicSchema = {
             optional: true,
             ...integerChecking('Product Id')
         }
+    },
+    order:{
+        'userName': {
+            ...textFieldChecking('Contact')
+        },
+        'email': {
+            ...emailFieldChecking('Email')
+        }
     }
 
 };

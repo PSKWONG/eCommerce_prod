@@ -36,6 +36,16 @@ const requestInputValidation = {
     products:{
         listing: {...basicSchema.products}
     },
+    order:{
+        users:{
+            'userName': {
+                ...basicSchema.order['userName']
+            },
+            'email': {
+                ...basicSchema.order['email']
+            },
+        }
+    },
 
     getValidationErrors: async (schema, inputs) => {
 

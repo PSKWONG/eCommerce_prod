@@ -33,30 +33,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import orderProcess from './data/menuItems.json';
 import progressChecking from './middlewares/progressChecking';
 import dataChecking from './middlewares/dataChecking';
-
-
-
-/*************** Create Order Slice ****************** */
-/*
-//Data Checking template 
-const dataCheckingTemplate = {
-    server: (() => {
-
-        const templateArray = [];
-
-        (orderProcess ?? []).forEach((step) => {
-            templateArray.push(step.ref)
-        });
-
-        //Checking 
-        console.log(`Data Checking Tempalte for server: ${JSON.stringify(templateArray, null, 2)}`)
-
-        return templateArray;
-    })(),
-    store: Array((orderProcess ?? []).length).fill(false),
-}
-*/
-
+import cancelOrder from './middlewares/cancelOrder'; 
 
 
 /*************** States Default Values ****************** */
@@ -135,6 +112,18 @@ const orderSlice = createSlice({
                 state.status.isError = false;
             })
             .addCase(dataChecking.rejected, (state, action) => {
+                state.status.isLoading = false;
+                state.status.isError = true;
+                state.status.errorMsg = action?.payload;
+            })
+            .addCase(cancelOrder.pending, (state) => {
+                state.status.isLoading = true;
+            })
+            .addCase(cancelOrder.fulfilled, (state) => {
+                state.status.isLoading = false;
+                state.status.isError = false;
+            })
+            .addCase(cancelOrder.rejected, (state, action) => {
                 state.status.isLoading = false;
                 state.status.isError = true;
                 state.status.errorMsg = action?.payload;

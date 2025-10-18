@@ -14,7 +14,7 @@ const MenuListComponent = (props) => {
     //Navigation Menu 
     let portalMenuContent = [];
     portalMenuContent = (menuItems ?? []).map((item, index) => {
-        return <MenuItemCompnent key={`O_menu_${index}`} type={'icon'} data={item} />
+        return <MenuItemCompnent key={`O_menu_${index}`} type={'label'} data={item} />
     })
 
 

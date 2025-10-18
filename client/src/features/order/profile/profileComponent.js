@@ -20,7 +20,7 @@ const ProfileComponent = (props) => {
     const { profileData } = data;
     const { handleOnChange, handleLogin } = action;
 
-    const { username, email } = profileData ?? {};
+    const { userName, email } = profileData ?? {};
 
     return (
         <div className={` ${styles.contentWrapper}`}>
@@ -36,7 +36,7 @@ const ProfileComponent = (props) => {
                 <form className={formStyles.formWrapper}>
                     <div>
                         <label>User Name: </label>
-                        <input name="username" type="text" value={username} onChange={handleOnChange} />
+                        <input name="userName" type="text" value={userName} onChange={handleOnChange} />
                     </div>
                     <div>
                         <label>Email: </label>

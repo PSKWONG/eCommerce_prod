@@ -40,13 +40,6 @@ const cartController = {
         } else {
             const localVersion = localData?.version ?? 0;
             const remoteVersion = remoteData?.version ?? 0;
-
-            //Internal Log - Checking 
-            console.log(
-                `
-                The cart data of ${localVersion > remoteVersion ? 'Local' : ' Remote'} is choosen.
-                `)
-
             req.session.cart = localVersion > remoteVersion ? localData : remoteData;
 
             next();
@@ -91,11 +84,6 @@ const cartController = {
         const sessionCartList = sessionData?.cartList ?? null;
 
 
-        //Checking
-            console.log(`Server / cartController / Session List
-                Input : ${JSON.stringify(sessionCartList, null, 2)}
-                `)
-
         /*************** Database Data (CartList) ****************** */
         let dbCartList = null;
         try {
@@ -120,19 +108,16 @@ const cartController = {
         switch (true) {
 
             case (Object.keys(sessionCartList) === 0 && dbCartList.length > 0 ):
-                console.log('Cart Controller / Data handling / Only Database')
                 updatedCartList = cartHelper.dataConvertor.dbToStore(dbCartList);
                 break;
 
             case (Object.keys(sessionCartList) !== 0 ):
-                console.log('Cart Controller / Data handling / Merge Data')
                 cartHelper.dataMerge(sessionCartList, dbCartList, userId);
                 updatedCartList = sessionCartList; 
                 updatedSteps += 1;
                 break;
 
             default:
-                console.log('Cart Controller / Data handling / Default')
                 updatedCartList = null;
                 break;
         }

@@ -88,13 +88,6 @@ const cartHelper = {
     },
     dataMerge: async (session, database, userId) => {
 
-        console.log(
-            `Start of data merge:
-            # Session: ${session}
-            # Database: ${database}
-            # user ID : ${userId}
-            `)
-
         //Data Checking - Make sure the data is avaliable
         const { isEmptyObject } = dataValidator.checking;
         if (isEmptyObject(session), !userId) {

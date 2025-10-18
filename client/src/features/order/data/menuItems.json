@@ -16,21 +16,21 @@
     {
         "ref": "delivery", 
         "label": "Delivery",
-        "path": "/",
+        "path": "/order/delivery",
         "selected": false,
         "instructions": ["Back", "Process to Payment"]
     },
     {
         "ref": "payment", 
         "label": "Payment",
-        "path": "/",
+        "path": "/order/payment",
         "selected": false,
         "instructions": ["Back", null]
     },
     {
         "ref": "confirmation", 
         "label": "Confirmation",
-        "path": "/",
+        "path": "/order/confirmation",
         "selected": false,
         "instructions": [null, "OK"]
     }

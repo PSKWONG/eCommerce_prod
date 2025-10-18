@@ -62,6 +62,13 @@ const MenuItemComponent = (props) => {
                     <span>{label}</span>
                 </li>
             )
+        case (type === 'label'):
+            return (
+                <li className={`${styles.item} ${styles.icon} ${selected?'selectedMenuItem':''}`}>
+                    <IconSet data={ref} />
+                    <span>{label}</span>
+                </li>
+            )
 
         default: //type = 'text' 
             return (

@@ -71,16 +71,21 @@ const orderController = {
         //Initiate response constructor 
         const response = responseConstructor();
 
-        //Initiate the checker process; 
+        
         try {
-            const isValid = dataChecker(req, response);
 
-            //Initiate / Update the order session
-            req.session.order = {
-                process: {
-                    [section] : isValid
-                }
-            };
+            //Initiate the checker process; 
+            const isValid = await dataChecker(req, response);
+
+            //Cehcking if session is ready for update 
+            if (!req.session.order){
+                req.session.order = {}; 
+                req.session.order.process = {}; 
+            }
+            
+            //Update the order session
+            req.session.order.process[section] = isValid;
+            
 
             if (isValid) {
                 res.status(200).send();
@@ -112,7 +117,7 @@ const orderController = {
                     #Input: 
                         - section: ${JSON.stringify(section, null, 2)}
                         - sectionData: ${JSON.stringify(sectionData, null, 2)}
-                    #Error: ${err}
+                    #Error: ${JSON.stringify(err, null, 2)}
                     `
             );
 
@@ -120,6 +125,32 @@ const orderController = {
 
             return;
 
+        }
+
+    },
+    cancelOrder: async (req,res) =>{
+
+        try {
+
+            //Session Data Resetting 
+            let orderData = req?.session?.order ?? null ; 
+
+            if( orderData && typeof orderData === 'object'){
+                for ( let section in orderData ){
+                    orderData[section] = {}; 
+                }
+            }
+
+            res.status(200).send();
+
+        } catch (err) {
+            //Internal Log
+            console.log(`
+                Unexpected Errors: Order / Order cancelling    
+                Error: ${JSON.stringify(err, null, 2)}
+                `)
+            res.status(500).send();
+            return;
         }
 
     }

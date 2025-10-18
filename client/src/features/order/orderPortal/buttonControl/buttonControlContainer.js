@@ -17,57 +17,34 @@ Logic:
 /***************Import external Modules****************** */
 import { useContext } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
 
 /***************Import Internal Modules****************** */
-import process from '../../data/menuItems.json';
 import PageComponent from './buttonControlComponent';
 import { OrderPortalDataSharing } from '../orderPortalContainer';
-import useDataChecker from '../../hook/dataChecker';
-import { resetOrder } from '../../orderSlice';
+import useProgressGuide from '../../hook/progressGuide';
+
+
 
 
 
 const ButtonControlContainer = () => {
 
-    //Hook Actions
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    //Import button actions 
+    const { handleCancellation, handleForward, handleBackward } = useProgressGuide();
+
 
     /*************** Get selected Index ****************** */
     const { data } = useContext(OrderPortalDataSharing).portalProgressData ?? {};
-    const currentIndex = data?.currentIndex ?? 0;
+    const { currentIndex, progressGuide } = data ?? {};
 
-    /*************** Initiate Data Checker ****************** */
-    const dataChecker = useDataChecker(currentIndex);
 
-    /***************Button Actions****************** */
-    const handleCancellation = (event) => {
-        event.preventDefault();
-        dispatch(resetOrder());
-        navigate('/order');
-        return;
-    };
-
-    const handleForward = async (event) => {
-
-        event.preventDefault();
-
-        dataChecker();
-
-    };
-
-    const handleBackward = (event) => {
-        event.preventDefault();
-        navigate(process[((currentIndex - 1) ?? 0)].path);
-    };
 
 
     /***************Export data****************** */
     const exportedData = {
         data: {
-            forward: process[currentIndex]?.instructions[1] ?? null,
-            backward: process[currentIndex]?.instructions[0] ?? null,
+            forward: progressGuide[currentIndex]?.instructions[1] ?? null,
+            backward: progressGuide[currentIndex]?.instructions[0] ?? null,
             status: {
 
             }
