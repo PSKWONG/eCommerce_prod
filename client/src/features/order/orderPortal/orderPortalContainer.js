@@ -7,7 +7,7 @@ Logic:
 */
 
 /***************Import external Modules****************** */
-import React, { useState , createContext } from 'react';
+import React, { useState, useMemo, createContext } from 'react';
 import { useSelector } from 'react-redux';
 
 
@@ -32,7 +32,8 @@ const OrderPortalContainer = () => {
 
 
     /*************** Set portal progress Data ****************** */
-    const [currentIndex, setCurrentIndex ]  = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const section = useMemo(() => progressGuide[currentIndex].ref, [currentIndex])
 
     /*************** Set Display Element  ****************** */
     const displayElement = usePageSelector(currentIndex, progressGuide);
@@ -43,7 +44,7 @@ const OrderPortalContainer = () => {
         data: {
             currentIndex,
             progressGuide,
-
+            section
         },
         actions: {
             setCurrentIndex

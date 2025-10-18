@@ -61,14 +61,14 @@ const orderSlice = createSlice({
     initialState: { ...orderDataTemplate },
     reducers: {
         updateOrderData: (state, action) => {
-            const { currentIndex, sectionData } = action?.payload ?? {};
+            const { section, sectionData } = action?.payload ?? {};
 
-            if (!currentIndex || !sectionData) {
+            if (!section || !sectionData) {
                 return;
             } else {
                 const updateData = {
                     ...state.data.orderData,
-                    [orderProcess[currentIndex].ref]: sectionData
+                    [section]: sectionData
                 };
                 state.data.orderData = updateData;
                 console.log(`Updated Order Data: ${JSON.stringify(state.data.orderData, null , 2)}`); 

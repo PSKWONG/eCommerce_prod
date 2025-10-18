@@ -29,7 +29,7 @@ const useProgressGuide = () => {
 
     /*************** Get selected Index ****************** */
     const { data, actions } = useContext(OrderPortalDataSharing).portalProgressData ?? {};
-    const { currentIndex, progressGuide } = data ?? {};
+    const { currentIndex, progressGuide, section } = data ?? {};
     const { setCurrentIndex } = actions;
 
     /***************Button Actions****************** */
@@ -60,7 +60,7 @@ const useProgressGuide = () => {
 
     const handleForward = async (event) => {
 
-        if(event){
+        if (event) {
             event.preventDefault();
         }
 
@@ -83,6 +83,13 @@ const useProgressGuide = () => {
 
     const handleBackward = (event) => {
         event.preventDefault();
+
+        if (section === 'delivery') {
+            setCurrentIndex((prev) => {
+                    return prev - 2;
+            })
+        }
+
         setCurrentIndex((prev) => {
             if (prev > 0) {
                 return prev - 1;

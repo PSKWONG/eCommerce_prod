@@ -32,7 +32,7 @@ const ProfileContainer = React.memo(() => {
     const { handleForward } = useProgressGuide();
 
     /*************** Data Checker  ****************** */
-    const currentIndex = useContext(OrderPortalDataSharing).portalProgressData?.data?.currentIndex ?? 0;
+    const { section } = useContext(OrderPortalDataSharing).portalProgressData?.data ?? {};
 
     /*************** Profile Infromation  ****************** */
     //Store for the Form Data ( Exported Data )
@@ -49,7 +49,7 @@ const ProfileContainer = React.memo(() => {
                 handleForward();
             }
         }
-        handleAuthenUser(); 
+        handleAuthenUser();
 
     }, [])
 
@@ -81,8 +81,8 @@ const ProfileContainer = React.memo(() => {
     //Handle Sync of data change between store and form 
     useEffect(() => {
         //Update the readiness of the section
-        dispatch(updateOrderData({ currentIndex, sectionData: profileData }))
-    }, [profileData, currentIndex, dispatch])
+        dispatch(updateOrderData({ section, sectionData: profileData }))
+    }, [profileData, section, dispatch])
 
 
     //Handle Login / Sign up redirecting 

@@ -1,16 +1,18 @@
 /***************Import external Modules****************** */
 
 /***************Import Internal Modules****************** */
-import cartList from '../../../cart/list/CartListContainer';
+import cart from '../../../cart/list/CartListContainer';
 import profile from '../../profile/profileContainer';
+import delivery from '../../delivery/deliveryContainer'; 
 
 
 
 
 
 const pageRegistration = {
-    cart: cartList,
-    profile: profile 
+    cart,
+    profile,
+    delivery
 }
 
 export default pageRegistration;
